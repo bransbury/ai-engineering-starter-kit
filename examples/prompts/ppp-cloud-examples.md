@@ -63,11 +63,11 @@ When the cloud agent stops, it should return something like this:
 
 ---
 
-**Status: Stopped — blocker**
+### Status: Stopped — blocker
 
 I cannot complete this task safely without human input.
 
-**Why I stopped:**
+### Why I stopped
 
 This task requires product and permission decisions that are not specified and cannot be inferred safely:
 
@@ -77,7 +77,7 @@ This task requires product and permission decisions that are not specified and c
 
 These fall under guardrailed decisions (permissions, data migration, tenancy). Proceeding without answers would require inventing product behaviour.
 
-**What I found:**
+### What I found
 
 | Area | File/module | Status | Notes |
 |---|---|---|---|
@@ -85,7 +85,7 @@ These fall under guardrailed decisions (permissions, data migration, tenancy). P
 | Policy call sites | `src/reports/create.ts`, `src/reports/read.ts` | Confirmed | Both call `reportPolicy.can(user, action)` |
 | Migration tooling | — | Missing | No migration scripts found for this area |
 
-**What's needed before I can proceed:**
+### What's needed before I can proceed
 
 1. A clear spec of the new permission rules per role
 2. Confirmation of whether existing saved reports need migrating
@@ -96,6 +96,7 @@ Once those are clear, this task is a good fit for `ppp-cloud`.
 ---
 
 Key things this stop got right:
+
 - did not guess at permission rules
 - clearly stated what was and was not inspected
 - returned actionable next steps rather than a vague error

@@ -46,7 +46,9 @@ skill_version() {
 
 backup_file() {
   local path="$1"
-  local backup_path="${path}.bak.$(date +%Y%m%d%H%M%S)"
+  local backup_path
+
+  backup_path="${path}.bak.$(date +%Y%m%d%H%M%S)"
 
   run_cmd cp "$path" "$backup_path"
   if (( DRY_RUN )); then

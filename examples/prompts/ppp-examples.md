@@ -46,7 +46,7 @@ The following is an example of a good PPP run for the whitespace-only bug fix pr
 
 ---
 
-**Current phase: Inspecting**
+### Current phase: Inspecting
 
 | Area | File/module | Status | Evidence |
 |---|---|---|---|
@@ -58,7 +58,7 @@ The following is an example of a good PPP run for the whitespace-only bug fix pr
 
 ---
 
-**Current phase: Planning**
+### Current phase: Planning
 
 Smallest safe change: trim before the length check in `reportNameSchema`, and add a test for whitespace-only input.
 
@@ -74,20 +74,22 @@ Choose an option:
 
 ---
 
-**[After patching — current phase: Reviewing]**
+### After patching — current phase: Reviewing
 
 Changes:
+
 - `src/reports/validation.ts`: added `.trim()` before `minLength` check
 - `src/reports/validation.test.ts`: added test for whitespace-only name
 
 Checks run: `pnpm test src/reports` — passed (14 tests, 1 new)
 
 Production readiness:
+
 - No migration needed
 - No API contract change
 - Existing valid names unaffected
 
-**PR**
+### PR
 
 Title: `fix: reject whitespace-only report names`
 
@@ -99,6 +101,7 @@ Body:
 ---
 
 Key things this run got right:
+
 - inspected before editing
 - no unnecessary questions
 - defined proof before patching
