@@ -82,6 +82,8 @@ Create one focused draft PR.
 Follow repo PR template and commit/title conventions.
 ```
 
+This repo also includes a ready-to-copy issue template at `.github/ISSUE_TEMPLATE/ppp-cloud-task.md`.
+
 ## Review expectation
 
 Cloud-created PRs should still be reviewed by a human.

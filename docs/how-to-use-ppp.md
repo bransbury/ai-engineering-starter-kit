@@ -2,9 +2,21 @@
 
 `/ppp` is a practical AI-assisted workflow for normal engineering tasks.
 
+## How PPP works
+
+PPP stands for:
+
+- **Plan** the smallest safe complete change.
+- **Patch** the code in small, controlled steps.
+- **Prove** it works before PR.
+
+The actual workflow is deliberately proof-first:
+
 ```text
 Inspect → Clarify → Plan → Prove → Patch → Review → PR
 ```
+
+Prove starts before Patch: the agent defines the proof first, then patches in small loops and runs the proof as it goes.
 
 ## Start with a ticket
 
@@ -47,7 +59,7 @@ A good PPP run should:
 - ask only blocking or high-impact questions
 - recommend safe defaults where appropriate
 - plan the smallest safe complete change
-- define proof before patching
+- define how the change will be verified before editing
 - add or update tests/checks where appropriate
 - patch in small validated loops
 - stop after two focused failed fix attempts
