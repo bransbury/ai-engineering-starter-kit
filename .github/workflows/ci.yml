@@ -17,6 +17,14 @@ jobs:
           scandir: "."
           additional_files: "install.sh uninstall.sh"
 
+  validate-skills:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate skill frontmatter and fences
+        run: python3 scripts/validate_skills.py
+
   markdownlint:
     name: Markdown
     runs-on: ubuntu-latest

@@ -8,6 +8,8 @@ For normal engineering tasks, prefer Plan. Patch. Prove:
 Inspect → Clarify → Plan → Prove → Patch → Review → PR
 ```
 
+Plan the change. Patch safely. Prove it before PR.
+
 Do not start coding before inspecting relevant code.
 
 Do not make product, architecture, auth, security, data migration, permission, tenancy, billing, or public API decisions without explicit human approval.
