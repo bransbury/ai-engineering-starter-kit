@@ -1,0 +1,20 @@
+---
+description: Use Plan. Patch. Prove for normal engineering tasks
+alwaysApply: false
+---
+
+When the user asks to implement a normal ticket, follow Plan. Patch. Prove:
+
+```text
+Inspect → Clarify → Plan → Prove → Patch → Review → PR
+```
+
+Inspect relevant code before editing.
+
+Ask only blocking questions.
+
+Define proof before patching.
+
+Patch in small validated loops.
+
+Review production readiness before PR.

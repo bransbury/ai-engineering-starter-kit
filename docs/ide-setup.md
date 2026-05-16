@@ -1,0 +1,86 @@
+# IDE setup
+
+This starter kit is intended to work across IDEs and AI coding tools.
+
+## Quick matrix
+
+| Tool | Recommended setup | Notes |
+|---|---|---|
+| VS Code + GitHub Copilot | Install personal skills to `~/.agents/skills` and `~/.copilot/skills` | Use Agent Mode where available |
+| IntelliJ + GitHub Copilot | Use `/ppp` if skills are picked up; otherwise paste “Use PPP on this ticket” | Skill support may vary by environment |
+| Cursor | Add PPP as a rule and keep canonical skill under `.agents/skills` | Use project/team/user rules |
+| Claude Code | Use repo-local skills where supported | Keep PPP canonical in `skills/ppp/SKILL.md` |
+
+## GitHub Copilot / VS Code
+
+Install the skills:
+
+```bash
+./install.sh
+```
+
+Open your repo in VS Code, open Copilot Chat in Agent Mode, then run:
+
+```text
+/ppp <ticket>
+```
+
+**How skill discovery works:**
+`/ppp` becomes available as a slash command when your Copilot environment supports loading personal skills from `~/.copilot/skills/` or `~/.agents/skills/`. If `/ppp` does not autocomplete in the chat input, your setup may not load skills from those paths — use the fallback invocation instead.
+
+**Fallback invocation (always works):**
+
+```text
+Use the Plan. Patch. Prove workflow on this ticket:
+<paste ticket>
+```
+
+**Most reliable approach — repo-level guidance:**
+Copy `templates/AGENTS.md` to `AGENTS.md` and `templates/copilot-instructions.md` to `.github/copilot-instructions.md` in your repo. These are picked up automatically by Copilot in VS Code and instruct it to follow the PPP loop regardless of whether the skill is installed.
+
+## IntelliJ / JetBrains
+
+Use:
+
+```text
+/ppp <ticket>
+```
+
+If the skill is not picked up, paste:
+
+```text
+Use the Plan. Patch. Prove workflow on this ticket:
+<paste ticket>
+```
+
+Repo-local `AGENTS.md` and `.github/copilot-instructions.md` should also tell the assistant to follow the PPP loop.
+
+## Cursor
+
+If you run `./install.sh` from a project directory that already has a `.cursor/` folder, the rule is installed automatically to `.cursor/rules/ppp.mdc`.
+
+To install manually into a project:
+
+```bash
+cp path/to/ai-engineering-starter-kit/templates/cursor-ppp-rule.mdc .cursor/rules/ppp.mdc
+```
+
+## Claude Code
+
+If your setup supports repo-local skills, copy:
+
+```text
+skills/ppp/SKILL.md
+```
+
+to:
+
+```text
+.claude/skills/ppp/SKILL.md
+```
+
+And for cloud-agent style autonomous work:
+
+```text
+.claude/skills/ppp-cloud/SKILL.md
+```
