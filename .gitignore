@@ -7,3 +7,4 @@
 
 # Node (if dependencies are ever added)
 node_modules/
+*.tgz

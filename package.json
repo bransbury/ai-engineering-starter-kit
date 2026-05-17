@@ -1,10 +1,18 @@
 {
   "name": "ai-engineering-starter-kit",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Plan. Patch. Prove. Practical AI-assisted engineering workflows for IDE and cloud coding agents.",
   "license": "MIT",
   "private": false,
   "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bransbury/ai-engineering-starter-kit.git"
+  },
+  "homepage": "https://github.com/bransbury/ai-engineering-starter-kit#readme",
+  "bugs": {
+    "url": "https://github.com/bransbury/ai-engineering-starter-kit/issues"
+  },
   "bin": {
     "ai-engineering-starter-kit": "bin/ai-engineering-starter-kit.js",
     "aesk": "bin/ai-engineering-starter-kit.js"
@@ -18,5 +26,8 @@
   ],
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

@@ -8,7 +8,7 @@ Recommended flow:
 
 1. Merge the release branch into `main`.
 2. Push an annotated tag such as `v0.3.0`.
-3. GitHub Actions validates the tag and creates the GitHub Release automatically.
+3. GitHub Actions validates the tag, publishes the npm package, and creates the GitHub Release automatically.
 
 This is safer than releasing automatically on every merge to `main`. It keeps the release moment explicit, while removing the repetitive GitHub UI work.
 
@@ -41,16 +41,18 @@ This document now describes the intended behavior of that implementation and the
 ## Goals
 
 - Create a GitHub Release automatically when a valid release tag is pushed.
-- Ensure the tagged commit passes release-critical validation before the release is published.
+- Ensure the tagged commit passes release-critical validation before npm or GitHub publishing happens.
 - Use the repo changelog as the source of release notes.
+- Publish the npm package automatically from the release tag.
 - Prevent obvious mismatches such as tag `v0.3.0` with skill version `0.2.0`.
+- Prevent package version mismatches such as tag `v0.5.0` with `package.json` version `0.4.0`.
 - Keep the release process simple enough for a small OSS repo.
 
 ## Non-goals
 
 - Fully automatic version bumping on merge.
 - Conventional-commits-based semantic release.
-- Publishing packages to npm, PyPI, or another package registry.
+- Publishing packages to registries other than npm.
 - Building binary artifacts.
 
 ## Functional requirements
@@ -72,9 +74,13 @@ This document now describes the intended behavior of that implementation and the
   - Example: tag `v0.3.0` requires `## 0.3.0` in `CHANGELOG.md`.
 - `skills/ppp/SKILL.md` and `skills/ppp-cloud/SKILL.md` must have frontmatter `version` values matching the release version.
   - Example: tag `v0.3.0` requires `version: 0.3.0`.
+- `package.json` must have a `version` value matching the release version.
+  - Example: tag `v0.5.0` requires `"version": "0.5.0"`.
 
 ### Release creation
 
+- The workflow must publish the npm package before creating the GitHub Release.
+- npm publishing should use npm trusted publishing via GitHub Actions OIDC.
 - The workflow must create a GitHub Release if one does not already exist for the tag.
 - The release title should default to the tag.
   - Example: `v0.3.0`
@@ -88,7 +94,7 @@ This document now describes the intended behavior of that implementation and the
   - tag not on `main`
   - missing changelog section
   - skill version mismatch
-  - CI not green
+  - package version mismatch
 - The workflow must not silently create partial or malformed releases.
 
 ## Recommended implementation
@@ -104,9 +110,10 @@ Add a new workflow such as:
 Current high-level flow:
 
 1. run release-critical checks
-2. validate the tag, branch ancestry, changelog, and skill versions
-3. extract release notes from `CHANGELOG.md`
-4. create the GitHub Release
+2. validate the tag, branch ancestry, changelog, skill versions, and package version
+3. publish the npm package
+4. extract release notes from `CHANGELOG.md`
+5. create the GitHub Release
 
 ### Validation logic
 
@@ -117,6 +124,7 @@ The workflow should:
 3. Run release-critical validation on the tagged commit.
 4. Check `CHANGELOG.md` for the matching version heading.
 5. Check both skill files for matching `version:` values.
+6. Check `package.json` for the matching `version` value.
 
 This logic can live in a small script under `scripts/`, which is preferable to embedding everything in shell in the workflow YAML.
 
@@ -142,8 +150,12 @@ Do not generate release notes from commit history as the primary source for this
 The workflow will need:
 
 - `contents: write`
+- `id-token: write`
 
-This is required for `softprops/action-gh-release` to create a GitHub Release via the Actions token.
+These are required for:
+
+- npm trusted publishing via OIDC
+- `softprops/action-gh-release` to create a GitHub Release via the Actions token
 
 ## Operational requirements
 
@@ -154,7 +166,7 @@ The intended release flow should be:
 1. Merge the prepared release branch into `main`.
 2. Pull latest `main` locally.
 3. Create and push the tag.
-4. Let GitHub Actions create the release.
+4. Let GitHub Actions publish the npm package and create the release.
 
 Example:
 
@@ -187,6 +199,7 @@ If a release is created incorrectly:
 - Add validation that the release tag is newer than the latest published release.
 - Add a check that README badge/version references remain coherent.
 - Add automatic discussion or announcement generation from release notes.
+- Add an optional dry-run release validation workflow-dispatch path that skips `npm publish`.
 
 ## Open questions
 
@@ -199,7 +212,9 @@ If a release is created incorrectly:
 The automation is complete when:
 
 - pushing `v0.3.0` on a valid `main` commit creates a GitHub Release automatically;
+- pushing `v0.5.0` on a valid `main` commit publishes the npm package automatically;
 - the release body is populated from `CHANGELOG.md`;
 - a mismatched skill version causes the workflow to fail;
+- a mismatched package version causes the workflow to fail;
 - a missing changelog section causes the workflow to fail;
 - a tag outside `main` does not publish a release.
