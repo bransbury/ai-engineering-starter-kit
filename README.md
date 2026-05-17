@@ -185,7 +185,6 @@ A good PPP run should:
 
 See a [full example run](examples/prompts/ppp-examples.md#what-good-output-looks-like).
 
-
 ## Cloud agent usage
 
 | | `/ppp` | `ppp-cloud` |
