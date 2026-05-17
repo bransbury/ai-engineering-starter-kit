@@ -28,10 +28,20 @@ A tag-driven workflow is the right middle ground:
 - compatible with semver tags like `v0.3.0`;
 - easy to understand for contributors.
 
+## Status
+
+Implemented in:
+
+- `.github/workflows/release.yml`
+- `scripts/validate_release.py`
+- `scripts/extract_release_notes.py`
+
+This document now describes the intended behavior of that implementation and the follow-on improvements that may still be worth adding later.
+
 ## Goals
 
 - Create a GitHub Release automatically when a valid release tag is pushed.
-- Ensure the tagged commit passed CI before the release is published.
+- Ensure the tagged commit passes release-critical validation before the release is published.
 - Use the repo changelog as the source of release notes.
 - Prevent obvious mismatches such as tag `v0.3.0` with skill version `0.2.0`.
 - Keep the release process simple enough for a small OSS repo.
@@ -57,7 +67,7 @@ A tag-driven workflow is the right middle ground:
 ### Preconditions
 
 - The tag must point to a commit on `main`.
-- Existing CI checks must pass for the tagged commit.
+- The tagged commit must pass release-critical validation in the release workflow.
 - `CHANGELOG.md` must contain a section matching the tag version without the `v` prefix.
   - Example: tag `v0.3.0` requires `## 0.3.0` in `CHANGELOG.md`.
 - `skills/ppp/SKILL.md` and `skills/ppp-cloud/SKILL.md` must have frontmatter `version` values matching the release version.
@@ -91,11 +101,12 @@ Add a new workflow such as:
 .github/workflows/release.yml
 ```
 
-Recommended high-level jobs:
+Current high-level flow:
 
-1. `validate-release-tag`
-2. `extract-release-notes`
-3. `create-github-release`
+1. run release-critical checks
+2. validate the tag, branch ancestry, changelog, and skill versions
+3. extract release notes from `CHANGELOG.md`
+4. create the GitHub Release
 
 ### Validation logic
 
@@ -103,16 +114,16 @@ The workflow should:
 
 1. Parse the tag version.
 2. Confirm the tagged commit is reachable from `origin/main`.
-3. Confirm the relevant CI workflow completed successfully for that commit.
+3. Run release-critical validation on the tagged commit.
 4. Check `CHANGELOG.md` for the matching version heading.
 5. Check both skill files for matching `version:` values.
 
 This logic can live in a small script under `scripts/`, which is preferable to embedding everything in shell in the workflow YAML.
 
-Suggested script split:
+Current script split:
 
 - `scripts/validate_release.py`
-- optional: `scripts/extract_release_notes.py`
+- `scripts/extract_release_notes.py`
 
 ### Release notes source
 
@@ -132,7 +143,7 @@ The workflow will need:
 
 - `contents: write`
 
-This is required to create a GitHub Release via the Actions token.
+This is required for `softprops/action-gh-release` to create a GitHub Release via the Actions token.
 
 ## Operational requirements
 

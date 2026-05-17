@@ -18,7 +18,7 @@ Inspect → Clarify → Plan → Prove → Patch → Review → PR
 
 Prove starts before Patch: the agent defines the proof first, then patches in small loops and runs the proof as it goes.
 
-## Start with a ticket
+## Start with a prompt
 
 ```text
 /ppp Fix whitespace-only report names being accepted.
@@ -27,8 +27,8 @@ Prove starts before Patch: the agent defines the proof first, then patches in sm
 or:
 
 ```text
-Use ppp on this ticket:
-<paste ticket>
+Use the Plan. Patch. Prove workflow on this prompt:
+<paste prompt>
 ```
 
 ## Responding to menus

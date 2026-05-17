@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/bransbury/ai-engineering-starter-kit)](LICENSE.md)
 [![Release](https://img.shields.io/github/v/release/bransbury/ai-engineering-starter-kit)](https://github.com/bransbury/ai-engineering-starter-kit/releases)
 
-Most engineers using AI assistants fall into the same pattern: ask a question in chat, paste the answer in, skip the tests, move on. It's fast until it isn't — reviews catch things nobody fully understands, tests get weakened to make CI pass, and the agent confidently makes decisions it shouldn't.
+AI coding agents are now part of everyday engineering work, but the process is often inconsistent. Engineers can prompt normally, yet the quality of the outcome still depends on whether the agent inspects the right code, asks only the necessary questions, plans a safe change, and proves it before PR.
 
 **Plan. Patch. Prove.**
 
@@ -16,7 +16,7 @@ The practical AI coding loop: inspect first, change safely, verify before PR.
 Inspect → Clarify → Plan → Prove → Patch → Review → PR
 ```
 
-This kit gives engineers two structured workflows that keep AI coding both fast and safe.
+PPP is a simple, practical workflow for everyday tasks and tickets. It gives AI coding agents a fast, reliable, consistent, and token-efficient loop: inspect first, plan the smallest safe complete change, patch in small validated steps, and prove the result before handoff.
 
 The starter kit includes:
 
@@ -24,6 +24,39 @@ The starter kit includes:
 - **Plan. Patch. Prove. Cloud (`ppp-cloud`)** — a non-interactive workflow for autonomous cloud coding agents
 - repo templates for agent guidance, Copilot instructions, PR templates, and Cursor rules
 - practical docs and examples for adoption
+
+## Quick start
+
+```bash
+npx ai-engineering-starter-kit install
+```
+
+If slash commands are supported in your tool, run:
+
+```text
+/ppp <prompt>
+```
+
+## If `/ppp` does not work
+
+`/ppp` works only where your agent tool loads skills as slash commands.
+
+Fallback invocation:
+
+```text
+Use the Plan. Patch. Prove workflow on this prompt:
+<paste prompt>
+```
+
+Not sure which setup to use? See [IDE setup](docs/ide-setup.md).
+
+Prefer shell scripts instead of `npx`?
+
+```bash
+git clone https://github.com/bransbury/ai-engineering-starter-kit
+cd ai-engineering-starter-kit
+./install.sh
+```
 
 ## How PPP works
 
@@ -40,8 +73,6 @@ Inspect → Clarify → Plan → Prove → Patch → Review → PR
 ```
 
 Prove starts before Patch: the agent defines the proof first, then patches in small loops and runs the proof as it goes.
-
-## How it works
 
 ### IDE flow
 
@@ -65,64 +96,18 @@ ppp-cloud
 Draft PR or blocker
 ```
 
-## What you get
-
-PPP helps AI coding agents:
-
-- inspect the relevant code before editing;
-- clarify only blocking questions;
-- plan the smallest safe complete change;
-- define proof before patching;
-- patch in small validated loops;
-- review production readiness;
-- prepare a PR handoff.
-
-> Plan the change. Patch safely. Prove it before PR.
-
 ## Which setup should I use?
 
 | I am... | Do this |
 | --- | --- |
-| Trying PPP personally | Run `./install.sh` |
+| Trying PPP personally | Run `npx ai-engineering-starter-kit install` |
 | Rolling out to a repo | Copy `templates/AGENTS.md` and `templates/copilot-instructions.md` |
 | Using Cursor | Copy `templates/cursor-ppp-rule.mdc` |
 | Assigning cloud-agent tasks | Use `ppp-cloud` and repo instructions |
 
-## Quick start
-
-```bash
-git clone https://github.com/bransbury/ai-engineering-starter-kit
-cd ai-engineering-starter-kit
-./install.sh
-```
-
-Important: `/ppp` works only where your agent tool loads skills as slash commands. If it does not, use the fallback invocation below.
-
-If slash commands are supported in your tool, run:
-
-```text
-/ppp <paste ticket or task>
-```
-
-Fallback invocation (always works):
-
-```text
-Use the Plan. Patch. Prove workflow on this ticket:
-<paste ticket>
-```
-
-Not sure which to use? See [IDE setup](docs/ide-setup.md).
-
-## How is this different?
-
-- Matt Pocock's skills are a broad library of composable expert workflows.
-- `gstack` is an opinionated full-stack and product operating system.
-- PPP is a small starter kit for teams who need a safe everyday AI coding loop.
-- PPP is deliberately narrow: inspect first, make the smallest safe change, prove it, then hand off a reviewable PR.
-
 ## What gets installed?
 
-The install script copies the skills to both common personal skill locations:
+The installers copy the skills to both common personal skill locations:
 
 ```text
 ~/.agents/skills/ppp/SKILL.md
@@ -137,7 +122,7 @@ If a `.cursor/` directory is detected in the current directory, it also installs
 .cursor/rules/ppp.mdc
 ```
 
-Run `./install.sh` from each project where you want the Cursor rule active.
+Run `npx ai-engineering-starter-kit install` or `./install.sh` from each project where you want the Cursor rule active.
 
 ## Repo-local install
 
@@ -146,9 +131,7 @@ GitHub supports project skills in `.github/skills`, `.claude/skills`, or `.agent
 For GitHub project skills:
 
 ```bash
-mkdir -p .github/skills/ppp .github/skills/ppp-cloud
-cp skills/ppp/SKILL.md .github/skills/ppp/SKILL.md
-cp skills/ppp-cloud/SKILL.md .github/skills/ppp-cloud/SKILL.md
+npx ai-engineering-starter-kit install --repo-local
 ```
 
 For most teams, the most reliable repo rollout is:
@@ -173,7 +156,6 @@ Good examples:
 ```text
 /ppp Fix whitespace-only report names being accepted.
 /ppp Add an empty state to the experiment results table when there are no rows.
-/ppp Update the token parser to preserve {{firstName|}} as an explicit empty fallback.
 ```
 
 ## When not to use `/ppp`
@@ -203,25 +185,6 @@ A good PPP run should:
 
 See a [full example run](examples/prompts/ppp-examples.md#what-good-output-looks-like).
 
-## Example: bug fix
-
-User:
-
-```text
-/ppp Fix whitespace-only report names being accepted.
-```
-
-PPP:
-
-- inspects validation files before editing
-- asks no unnecessary questions because the failure mode is clear
-- plans proof first by identifying the missing whitespace-only test
-- patches validation with the smallest safe change
-- runs targeted tests
-- reviews production readiness and prepares the PR handoff
-
-See the expanded transcript in [PPP example prompts](examples/prompts/ppp-examples.md#what-good-output-looks-like).
-
 ## Cloud agent usage
 
 | | `/ppp` | `ppp-cloud` |
@@ -238,7 +201,16 @@ Use `ppp-cloud` for autonomous coding agents. It is designed for clear, bounded,
 
 See [Cloud agent usage](docs/cloud-agent-usage.md).
 
-## Docs
+## How is this different?
+
+- Some skills are broad libraries of composable expert workflows.
+- Some tools are opinionated operating systems for full-stack or product development.
+- PPP is a narrow, practical workflow for everyday engineering tasks.
+- It focuses on a simple loop: inspect first, plan the smallest safe change, prove it before patching broadly, and hand off a reviewable PR.
+
+## Docs and templates
+
+### Docs
 
 - [How to use PPP](docs/how-to-use-ppp.md)
 - [IDE setup](docs/ide-setup.md)
@@ -247,16 +219,16 @@ See [Cloud agent usage](docs/cloud-agent-usage.md).
 - [Release automation spec](docs/release-automation-spec.md)
 - [Troubleshooting](docs/troubleshooting.md)
 
-## Templates
+### Templates
 
-Copy these into your repos to give AI agents consistent guidance:
+If you don't already have them, copy these into your repos to give AI agents consistent guidance:
 
 | Template | Copy to | Purpose |
 | --- | --- | --- |
 | `templates/AGENTS.md` | `AGENTS.md` (repo root) | Tells agents which workflow to use and what requires human approval |
 | `templates/copilot-instructions.md` | `.github/copilot-instructions.md` | Repo-level Copilot instructions picked up automatically in VS Code |
 | `templates/PULL_REQUEST_TEMPLATE.md` | `.github/PULL_REQUEST_TEMPLATE.md` | Consistent PR descriptions across human and AI-authored PRs |
-| `templates/cursor-ppp-rule.mdc` | `.cursor/rules/ppp.mdc` | Cursor project rule — automatically installed by `./install.sh` if `.cursor/` exists |
+| `templates/cursor-ppp-rule.mdc` | `.cursor/rules/ppp.mdc` | Cursor project rule — automatically installed by `npx ai-engineering-starter-kit install` or `./install.sh` if `.cursor/` exists |
 
 Each template is intentionally minimal. Add repo-specific conventions (architecture rules, test commands, forbidden areas) directly in `AGENTS.md` and `copilot-instructions.md`.
 

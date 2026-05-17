@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+- Added a native `npx` installer via `bin/ai-engineering-starter-kit.js`.
+- Added `package.json` for npm distribution and CLI aliases.
+- Added support for `install`, `uninstall`, `--dry-run`, `--force`, `--yes`, and `--repo-local` in the Node CLI.
+- Updated README install guidance to prefer `npx ai-engineering-starter-kit install`.
+
 ## 0.3.0
 
 - Added README badges for CI, license, and GitHub releases.
@@ -13,6 +20,7 @@
 - Added installer safety features: `--dry-run`, `--force`, backups, version output, and overwrite prompts.
 - Added a `.github/ISSUE_TEMPLATE/ppp-cloud-task.md` template for assigning bounded cloud-agent tasks.
 - Added a release automation spec recommending tag-driven GitHub Releases.
+- Implemented tag-driven GitHub release automation from `v*` tags.
 
 ## 0.2.0
 

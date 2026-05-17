@@ -1,0 +1,22 @@
+{
+  "name": "ai-engineering-starter-kit",
+  "version": "0.4.0",
+  "description": "Plan. Patch. Prove. Practical AI-assisted engineering workflows for IDE and cloud coding agents.",
+  "license": "MIT",
+  "private": false,
+  "type": "commonjs",
+  "bin": {
+    "ai-engineering-starter-kit": "bin/ai-engineering-starter-kit.js",
+    "aesk": "bin/ai-engineering-starter-kit.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "templates",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
