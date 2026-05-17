@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- Added npm trusted-publishing support to the release workflow.
+- Added release validation for `package.json` version matching the release tag.
+- Added npm package metadata fields for repository, homepage, and issue tracker URLs.
+- Added `.tgz` package artifacts to `.gitignore`.
+
 ## 0.4.0
 
 - Added a native `npx` installer via `bin/ai-engineering-starter-kit.js`.

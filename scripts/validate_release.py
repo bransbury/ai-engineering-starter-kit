@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 import sys
@@ -17,6 +18,7 @@ SKILL_FILES = [
     ROOT / "skills" / "ppp" / "SKILL.md",
     ROOT / "skills" / "ppp-cloud" / "SKILL.md",
 ]
+PACKAGE_JSON = ROOT / "package.json"
 
 
 def git(*args: str) -> subprocess.CompletedProcess[str]:
@@ -39,13 +41,20 @@ def ensure_tag_format(tag: str) -> str:
 
 def ensure_commit_on_default_branch(commit: str, default_branch: str) -> None:
     ref = f"origin/{default_branch}"
-    fetch = git("fetch", "origin", default_branch, "--depth=1")
+    fetch = git("fetch", "origin", default_branch)
     if fetch.returncode != 0:
         raise ValueError(fetch.stderr.strip() or f"Failed to fetch {ref}")
 
+    verify = git("rev-parse", "--verify", ref)
+    if verify.returncode != 0:
+        raise ValueError(f"Could not verify default branch ref {ref}")
+
     result = git("merge-base", "--is-ancestor", commit, ref)
     if result.returncode != 0:
-        raise ValueError(f"Tagged commit {commit} is not reachable from {ref}")
+        raise ValueError(
+            f"Tagged commit {commit} is not reachable from {ref}. "
+            f"Create release tags from the merged commit on {default_branch}, not from a branch tip before merge."
+        )
 
 
 def read_skill_version(path: Path) -> str:
@@ -54,6 +63,21 @@ def read_skill_version(path: Path) -> str:
     if not match:
         raise ValueError(f"Missing version field in {path}")
     return match.group(1)
+
+
+def read_package_version(path: Path) -> str:
+    if not path.exists():
+        raise ValueError(f"Missing package metadata file: {path}")
+
+    try:
+        content = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ValueError(f"Invalid JSON in {path}: {error}") from error
+
+    version = content.get("version")
+    if not version or not isinstance(version, str):
+        raise ValueError(f"Missing package version in {path}")
+    return version
 
 
 def main() -> int:
@@ -82,6 +106,12 @@ def main() -> int:
                 raise ValueError(
                     f"Skill version mismatch in {skill_path}: expected {version}, found {skill_version}"
                 )
+
+        package_version = read_package_version(PACKAGE_JSON)
+        if package_version != version:
+            raise ValueError(
+                f"Package version mismatch in {PACKAGE_JSON}: expected {version}, found {package_version}"
+            )
 
         if not args.skip_main_branch_check:
             ensure_commit_on_default_branch(args.commit, args.default_branch)
