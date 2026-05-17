@@ -184,5 +184,5 @@ fi
 echo
 log "Done."
 log "Important: /ppp works only where your tool loads skills as slash commands."
-log "Fallback: Use the Plan. Patch. Prove workflow on this ticket:"
-log "<paste ticket>"
+log "Fallback: Use the Plan. Patch. Prove workflow on this prompt:"
+log "<paste prompt>"

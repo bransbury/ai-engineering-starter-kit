@@ -5,8 +5,8 @@
 Try saying:
 
 ```text
-Use the Plan. Patch. Prove workflow on this ticket:
-...
+Use the Plan. Patch. Prove workflow on this prompt:
+<paste prompt>
 ```
 
 Check the skill is installed at one of:
