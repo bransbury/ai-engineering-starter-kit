@@ -10,6 +10,7 @@ const home = os.homedir();
 const skills = ["ppp", "ppp-cloud"];
 const personalTargets = [
   path.join(home, ".agents", "skills"),
+  path.join(home, ".claude", "skills"),
   path.join(home, ".copilot", "skills"),
 ];
 const repoLocalTargets = [path.join(process.cwd(), ".github", "skills")];
