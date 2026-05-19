@@ -61,6 +61,8 @@ cd ai-engineering-starter-kit
 ./install.sh
 ```
 
+![Plan. Patch. Prove skill preview](docs/images/ppp-skill-preview-vid.gif)
+
 ## Which setup should I use?
 
 | I am... | Do this |
