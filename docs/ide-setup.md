@@ -73,20 +73,16 @@ cp path/to/ai-engineering-starter-kit/templates/cursor-ppp-rule.mdc .cursor/rule
 
 ## Claude Code
 
-If your setup supports repo-local skills, copy:
+Run the installer to install PPP to `~/.claude/skills/`:
 
-```text
-skills/ppp/SKILL.md
+```bash
+npx ai-engineering-starter-kit install
 ```
 
-to:
+For repo-local skills (committed into the project), copy manually:
 
-```text
-.claude/skills/ppp/SKILL.md
-```
-
-And for cloud-agent style autonomous work:
-
-```text
-.claude/skills/ppp-cloud/SKILL.md
+```bash
+mkdir -p .claude/skills/ppp .claude/skills/ppp-cloud
+cp path/to/ai-engineering-starter-kit/skills/ppp/SKILL.md .claude/skills/ppp/SKILL.md
+cp path/to/ai-engineering-starter-kit/skills/ppp-cloud/SKILL.md .claude/skills/ppp-cloud/SKILL.md
 ```

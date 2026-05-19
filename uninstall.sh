@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-for root in "$HOME/.agents/skills" "$HOME/.copilot/skills"; do
+for root in "$HOME/.agents/skills" "$HOME/.claude/skills" "$HOME/.copilot/skills"; do
   for skill in ppp ppp-cloud; do
     target="$root/$skill"
     if [[ -d "$target" ]]; then

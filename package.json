@@ -27,6 +27,22 @@
   "engines": {
     "node": ">=18"
   },
+  "keywords": [
+    "ai",
+    "ai-coding",
+    "ai-engineering",
+    "coding-agent",
+    "developer-tools",
+    "workflow",
+    "github-copilot",
+    "cursor",
+    "plan-patch-prove",
+    "prompt",
+    "skills",
+    "llm",
+    "agents",
+    "devtools"
+  ],
   "publishConfig": {
     "provenance": true
   }

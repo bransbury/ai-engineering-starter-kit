@@ -169,8 +169,10 @@ fi
 echo
 
 install_skill "ppp" "$HOME/.agents/skills"
+install_skill "ppp" "$HOME/.claude/skills"
 install_skill "ppp" "$HOME/.copilot/skills"
 install_skill "ppp-cloud" "$HOME/.agents/skills"
+install_skill "ppp-cloud" "$HOME/.claude/skills"
 install_skill "ppp-cloud" "$HOME/.copilot/skills"
 
 echo

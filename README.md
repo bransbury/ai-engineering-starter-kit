@@ -3,8 +3,7 @@
 [![CI](https://github.com/bransbury/ai-engineering-starter-kit/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bransbury/ai-engineering-starter-kit/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/bransbury/ai-engineering-starter-kit)](LICENSE.md)
 [![Release](https://img.shields.io/github/v/release/bransbury/ai-engineering-starter-kit)](https://github.com/bransbury/ai-engineering-starter-kit/releases)
-
-AI coding agents are now part of everyday engineering work, but the process is often inconsistent. Engineers can prompt normally, yet the quality of the outcome still depends on whether the agent inspects the right code, asks only the necessary questions, plans a safe change, and proves it before PR.
+[![skills.sh](https://skills.sh/b/bransbury/ai-engineering-starter-kit)](https://skills.sh/bransbury/ai-engineering-starter-kit)
 
 **Plan. Patch. Prove.**
 
@@ -15,8 +14,6 @@ The practical AI coding loop: inspect first, change safely, verify before PR.
 ```text
 Inspect → Clarify → Plan → Prove → Patch → Review → PR
 ```
-
-PPP is a simple, practical workflow for everyday tasks and tickets. It gives AI coding agents a fast, reliable, consistent, and token-efficient loop: inspect first, plan the smallest safe complete change, patch in small validated steps, and prove the result before handoff.
 
 The starter kit includes:
 
@@ -29,6 +26,12 @@ The starter kit includes:
 
 ```bash
 npx ai-engineering-starter-kit install
+```
+
+Or via the [skills.sh](https://skills.sh) ecosystem:
+
+```bash
+npx skills add bransbury/ai-engineering-starter-kit
 ```
 
 If slash commands are supported in your tool, run:
@@ -57,6 +60,17 @@ git clone https://github.com/bransbury/ai-engineering-starter-kit
 cd ai-engineering-starter-kit
 ./install.sh
 ```
+
+![Plan. Patch. Prove skill preview](docs/images/ppp-skill-preview-vid.gif)
+
+## Which setup should I use?
+
+| I am... | Do this |
+| --- | --- |
+| Trying PPP personally | Run `npx ai-engineering-starter-kit install` |
+| Rolling out to a repo | Copy `templates/AGENTS.md` and `templates/copilot-instructions.md` |
+| Using Cursor | Copy `templates/cursor-ppp-rule.mdc` |
+| Assigning cloud-agent tasks | Run `npx ai-engineering-starter-kit install --repo-local`, add `AGENTS.md`, and use `ppp-cloud` |
 
 ## How PPP works
 
@@ -95,15 +109,6 @@ ppp-cloud
   ↓
 Draft PR or blocker
 ```
-
-## Which setup should I use?
-
-| I am... | Do this |
-| --- | --- |
-| Trying PPP personally | Run `npx ai-engineering-starter-kit install` |
-| Rolling out to a repo | Copy `templates/AGENTS.md` and `templates/copilot-instructions.md` |
-| Using Cursor | Copy `templates/cursor-ppp-rule.mdc` |
-| Assigning cloud-agent tasks | Use `ppp-cloud` and repo instructions |
 
 ## What gets installed?
 
