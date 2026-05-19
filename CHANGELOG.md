@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0
+
+- Improved README intro and surfaced the setup decision table earlier.
+- Added skills.sh quick-start to README.
+- Added npm `keywords` to `package.json` for registry discoverability.
+- Added skill preview GIF to README.
+- Added `scripts/bump_version.py` to automate version bumps across `package.json`, skill frontmatters, and `CHANGELOG.md`.
+
 ## 0.5.0
 
 - Added npm trusted-publishing support to the release workflow.
