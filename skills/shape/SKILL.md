@@ -273,7 +273,7 @@ Agents are worse at judging:
 Score each proposed task:
 
 | Dimension | Score 1 | Score 3 | Score 5 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Behaviour count | one behaviour | 2–3 related behaviours | many behaviours/workflows |
 | Module spread | one area | 2–3 related areas | many modules/services |
 | Contract change | none | internal contract | public API/schema/data model |
@@ -353,7 +353,7 @@ Criteria:
 For each task, classify:
 
 | Task ID | Clarity | Independence | Conflict risk | Risk | Verifiability | Recommendation | Evidence |
-|---|---:|---:|---:|---:|---:|---|---|
+| ------- | ------: | -----------: | ------------: | ---: | -----------: | -------------- | -------- |
 
 Scores are 1–5.
 
@@ -447,9 +447,7 @@ PR-size assessment:
 
 ## Suggested next prompt
 
-```text
-/ship <summary of shaped work>
-```
+    /ship <summary of shaped work>
 ```
 
 If there is only one clear task, suggest `/ppp` or `/ppp-cloud` directly instead of `/ship`.
