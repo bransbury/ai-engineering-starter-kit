@@ -1,6 +1,6 @@
 ---
 name: shape
-version: 0.7.0
+version: 0.8.0
 description: "Shape rough work into clear, scoped, testable PR-sized tasks for PPP, PPP Cloud, or Ship orchestration."
 ---
 
@@ -13,7 +13,7 @@ Shape does not implement code. Shape makes the work ready to ship.
 Core loop:
 
 ```text
-Understand → Clarify → Scope → Slice → Route
+Understand → Clarify → Scope → Slice → Confirm → Route
 ```
 
 Shape is for the work before building:
@@ -63,12 +63,15 @@ Do not use Shape for a tiny clear task that is already ready for PPP.
 - Do not create implementation tasks before understanding the goal.
 - Do not invent requirements.
 - Ask only blocking or high-impact questions.
+- Confirm high-impact decisions and routing recommendations interactively before treating the work as ready to ship.
 - Use recommended defaults for low-risk ambiguity.
 - Stop for critical product, security, auth, data, migration, tenancy, billing, or public API decisions.
 - Always identify the smallest safe first PR when possible.
 - Every proposed task must have scope, non-goals, proof, and dependencies.
 - Do not mark tasks independent without evidence.
 - Do not recommend parallel execution unless tasks are clear, low-risk, independently provable, and unlikely to conflict.
+- Present one decision or recommendation at a time, with option `1` as the recommended choice.
+- Wait for user confirmation before moving to the next decision or recommendation.
 
 ## Question policy
 
@@ -107,6 +110,40 @@ Use this format:
 ```
 
 If high-impact ambiguity remains, still provide a partial shape, but mark status as `needs-human-decision`.
+
+## Confirmation policy
+
+Before passing work to `/ship`, confirm shaping decisions and routing recommendations interactively.
+
+Use this flow:
+
+1. Present exactly one decision, recommendation, or unresolved trade-off at a time.
+2. Offer numbered options.
+3. Put the recommended option first as `1`.
+4. Explain briefly why option `1` is recommended.
+5. Wait for the user to choose or edit the recommendation before continuing.
+6. Record the confirmed decision in the shaped output before moving on.
+
+Use this format:
+
+```md
+## Confirm decision 1
+
+Decision:
+- ...
+
+Options:
+1. Recommended: ...
+2. ...
+3. ...
+
+Why this is recommended:
+- ...
+
+Reply with `1`, `2`, `3`, or provide an edited answer.
+```
+
+If there are no meaningful decisions to confirm, say so explicitly and continue.
 
 ## 1. Understand
 
@@ -302,7 +339,53 @@ For each recommendation, mark confidence:
 
 Do not use low-confidence analysis to recommend parallel execution.
 
-## 5. Route
+## 5. Confirm
+
+Before final routing, confirm:
+
+- recommended assumptions that materially affect scope
+- task boundaries if multiple valid splits exist
+- routing recommendations that affect delivery strategy
+- whether a repo spec artifact should be created before handoff
+
+Do this one item at a time.
+
+When the work is ready, present:
+
+```md
+## Ready to ship
+
+Options:
+1. Recommended: Pass the shaped work to `/ship` now.
+2. Create a spec file in the repository first, then decide whether to pass it to `/ship`.
+3. Stop here and keep the shaped output only.
+
+Reply with `1`, `2`, or `3`.
+```
+
+If the user chooses to create a spec file:
+
+- create or propose one concise repo-local spec artifact containing the confirmed shaped work
+- prefer an existing docs/specs/plans location if the repo already has one
+- otherwise suggest a clear repo-local path
+- after the spec is created, ask again whether to pass the work to `/ship`
+
+Use:
+
+```md
+## Spec created
+
+Path:
+- ...
+
+Next step:
+1. Recommended: Pass this spec and shaped work to `/ship`.
+2. Keep the spec only for now.
+
+Reply with `1` or `2`.
+```
+
+## 6. Route
 
 Recommend the safest execution path for each task.
 
@@ -417,6 +500,9 @@ Reason:
 Confidence:
 - High / Medium / Low
 
+## Confirmed decisions
+- ...
+
 ## Shaped work
 ...
 
@@ -446,9 +532,21 @@ PR-size assessment:
 ## Human decisions needed
 ...
 
+## Ready-to-ship prompt
+
+1. Recommended: Pass to `/ship`
+2. Create a spec file first
+3. Keep shaped output only
+
 ## Suggested next prompt
 
-    /ship <summary of shaped work>
+If passing directly to Ship:
+
+    /ship <summary of confirmed shaped work>
+
+If creating a spec first:
+
+    Create a repo-local spec file for this shaped work, then ask whether to pass it to /ship.
 ```
 
 If there is only one clear task, suggest `/ppp` or `/ppp-cloud` directly instead of `/ship`.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0
+
+- Updated `shape` to confirm decisions and routing recommendations interactively one at a time before handing off work.
+- Added a ready-to-ship handoff flow in `shape` that offers spec-file creation before `/ship`, then re-offers `/ship` after the spec step.
+- Tightened `ship` so it recommends the most efficient safe dependency-aware execution waves instead of defaulting toward overly sequential delivery.
+
 ## 0.7.0
 
 - Added `shape` and `ship` as first-class shipped skills in the installers and uninstallers.
