@@ -100,7 +100,7 @@ After the foundation is merged, Ship can reassess follow-on tasks for parallel e
 Ship may choose:
 
 | Mode | Use when |
-|---|---|
+| --- | --- |
 | Local PPP | One focused task, human steering useful |
 | PPP Cloud | One clear bounded autonomous task |
 | Shape only | Work is not ready to build |
@@ -136,7 +136,7 @@ Low-confidence tasks should not be parallelized.
 Ship should score each task from 1–5:
 
 | Dimension | Meaning |
-|---|---|
+| --- | --- |
 | Clarity | Expected behaviour is explicit |
 | Boundedness | Scope fits one coherent PR |
 | Verifiability | Proof is clear and runnable |
@@ -157,7 +157,7 @@ Route guidance:
 Score each candidate task from 1–5.
 
 | Dimension | Meaning |
-|---|---|
+| --- | --- |
 | Clarity | Expected behaviour is explicit |
 | Independence | Does not depend on unmerged work |
 | Conflict risk | Likelihood of overlapping file changes; lower is better |

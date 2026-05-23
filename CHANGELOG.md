@@ -4,7 +4,7 @@
 
 - Added `shape` and `ship` as first-class shipped skills in the installers and uninstallers.
 - Versioned all shipped skills consistently and updated release automation to validate and bump all four skills.
-- Updated README, setup docs, troubleshooting, and templates to explain when to use `shape`, `ship`, `/ppp`, and `ppp-cloud`.
+- Updated README, setup docs, troubleshooting, and templates to explain when to use `shape`, `ship`, `/ppp`, and `/ppp-cloud`.
 - Updated `shape` to confirm decisions and routing recommendations interactively one at a time before handing off work.
 - Added a ready-to-ship handoff flow in `shape` that offers spec-file creation before `/ship`, then re-offers `/ship` after the spec step.
 - Tightened `ship` so it recommends the most efficient safe dependency-aware execution waves instead of defaulting toward overly sequential delivery.
@@ -34,7 +34,7 @@
 ## 0.3.0
 
 - Added README badges for CI, license, and GitHub releases.
-- Added top-level "How it works" diagrams for `/ppp` and `ppp-cloud`.
+- Added top-level "How it works" diagrams for `/ppp` and `/ppp-cloud`.
 - Added a README setup decision table covering personal install, repo rollout, Cursor, and cloud-agent usage.
 - Added README positioning on how PPP differs from Matt Pocock's skills and `gstack`.
 - Clarified slash-command support and promoted the always-works fallback invocation.

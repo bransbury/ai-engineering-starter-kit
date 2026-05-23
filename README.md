@@ -5,22 +5,22 @@
 [![Release](https://img.shields.io/github/v/release/bransbury/ai-engineering-starter-kit)](https://github.com/bransbury/ai-engineering-starter-kit/releases)
 [![skills.sh](https://skills.sh/b/bransbury/ai-engineering-starter-kit)](https://skills.sh/bransbury/ai-engineering-starter-kit)
 
-**Shape. Ship. Plan. Patch. Prove.**
+**Shape the work. Ship the PRs.**
 
-Practical AI-assisted engineering workflows: shape rough work, choose a safe delivery path, and verify before PR.
+Practical AI-assisted engineering workflows: clarify rough work, choose the safest delivery path, and execute focused tasks with proof before PR.
 
-![Plan. Patch. Prove workflow overview](docs/images/plan-prove-patch-header.png)
+![AI Engineering Starter Kit hero image](docs/images/ai-eng-starter-kit-hero-v2.png)
 
 ```text
-Inspect → Clarify → Plan → Prove → Patch → Review → PR
+Shape → Ship
 ```
 
 The starter kit includes:
 
-- **Plan. Patch. Prove. (`/ppp`)** — an interactive workflow for engineers using an IDE agent
-- **Plan. Patch. Prove. Cloud (`ppp-cloud`)** — a non-interactive workflow for autonomous cloud coding agents
 - **Shape (`/shape`)** — a shaping workflow that turns rough work into clear, testable PR-sized tasks
 - **Ship (`/ship`)** — a coordination workflow that chooses the safest execution path across PPP, PPP Cloud, or parallel delivery
+- **Plan. Patch. Prove. (`/ppp`)** — an interactive execution workflow for one focused task in your IDE
+- **Plan. Patch. Prove - Cloud (`/ppp-cloud`)** — a non-interactive execution workflow for one bounded autonomous task
 - repo templates for agent guidance, Copilot instructions, PR templates, and Cursor rules
 - practical docs and examples for adoption
 
@@ -42,6 +42,7 @@ If slash commands are supported in your tool, run one of:
 /shape <prompt>
 /ship <prompt>
 /ppp <prompt>
+/ppp-cloud <prompt>
 ```
 
 ## If a slash-command skill does not work
@@ -76,27 +77,51 @@ cd ai-engineering-starter-kit
 | Using Cursor | Copy `templates/cursor-ppp-rule.mdc` |
 | Shaping rough work first | Run `npx ai-engineering-starter-kit install` and use `/shape` |
 | Coordinating multi-step delivery | Run `npx ai-engineering-starter-kit install` and use `/ship` |
-| Assigning cloud-agent tasks | Run `npx ai-engineering-starter-kit install --repo-local`, add `AGENTS.md`, and use `ppp-cloud` |
+| Assigning cloud-agent tasks | Run `npx ai-engineering-starter-kit install --repo-local`, add `AGENTS.md`, and use `/ppp-cloud` |
 
 ## Which skill should I use?
 
 | I want to... | Use |
 | --- | --- |
+| Give the system a task and let it choose the safest delivery path | `/ship` |
 | Clarify or split rough work before coding | `/shape` |
-| Choose the safest delivery path for a task or feature slice | `/ship` |
 | Complete one focused task interactively in an IDE | `/ppp` |
-| Delegate one clear bounded task to an autonomous coding agent | `ppp-cloud` |
+| Delegate one clear bounded task to an autonomous coding agent | `/ppp-cloud` |
 
 Examples:
 
 ```text
-/shape Add role-based approvals to expense reports.
 /ship Roll out the saved-reports feature safely across UI, validation, and docs.
+/shape Add role-based approvals to expense reports.
 /ppp Add an empty state to the experiment results table.
-ppp-cloud Add regression tests for report-name validation.
+/ppp-cloud Add regression tests for report-name validation.
 ```
 
-## How PPP works
+## The core workflow
+
+The starter kit is built around a simple top-level workflow:
+
+```text
+Shape → Ship
+```
+
+- **Shape** turns vague work into clear, scoped, PR-sized tasks.
+- **Ship** chooses the safest delivery path: local PPP, autonomous PPP Cloud, parallel worktrees, or stop for a human decision.
+
+In practice, Ship is the router:
+
+```text
+Task
+  ↓
+Ship
+  ├─ Shape first if unclear
+  ├─ /ppp for one local task
+  ├─ /ppp-cloud for one autonomous task
+  ├─ parallel worktrees when safe
+  └─ stop for a human decision
+```
+
+## Execution engine: PPP
 
 PPP stands for:
 
@@ -104,7 +129,7 @@ PPP stands for:
 - **Patch** the code in small, controlled steps.
 - **Prove** it works before PR.
 
-The actual workflow is deliberately proof-first:
+When work is ready, Ship uses the PPP execution loop:
 
 ```text
 Inspect → Clarify → Plan → Prove → Patch → Review → PR
@@ -129,7 +154,7 @@ PR handoff
 ```text
 Issue
   ↓
-ppp-cloud
+/ppp-cloud
   ↓
 Draft PR or blocker
 ```
@@ -166,10 +191,19 @@ npx ai-engineering-starter-kit install --repo-local
 
 For most teams, the most reliable repo rollout is:
 
-- repo-local skills for `/shape`, `/ship`, `/ppp`, and `ppp-cloud`
+- repo-local skills for `/shape`, `/ship`, `/ppp`, and `/ppp-cloud`
 - `AGENTS.md` at the repo root
 - `.github/copilot-instructions.md` for VS Code + Copilot
 - `.cursor/rules/ppp.mdc` for Cursor projects
+
+## The new default behaviour
+
+For most engineers, the simplest guidance is:
+
+- use `/ship` for normal work;
+- use `/shape` when you only want to clarify or split the work;
+- use `/ppp` when you already know it is one focused IDE task;
+- use `/ppp-cloud` when you already know it is one bounded autonomous task.
 
 ## When to use `/ppp`
 
@@ -201,7 +235,7 @@ Examples that are too large:
 
 For large work, ask `/ppp` to identify the smallest first task, or use a feature-slicing workflow.
 
-For vague or multi-PR work, prefer `/shape` or `/ship` first.
+For vague or multi-PR work, prefer `/ship` first or `/shape` if you only want clarification.
 
 ## What good looks like
 
@@ -219,14 +253,14 @@ See a [full example run](examples/prompts/ppp-examples.md#what-good-output-looks
 
 ## Cloud agent usage
 
-| | `/ppp` | `ppp-cloud` |
+| | `/ppp` | `/ppp-cloud` |
 | --- | --- | --- |
 | **Who drives it** | Engineer in IDE | Autonomous cloud agent |
 | **Interaction** | Interactive menus | Non-interactive, runs to completion |
 | **Output** | Guided session → PR handoff | Draft PR or blocker report |
 | **Best for** | Any normal ticket with a human in the loop | Clear, bounded tasks you can assign and review |
 
-Use `ppp-cloud` for autonomous coding agents. It is designed for clear, bounded, verifiable tasks where the agent should either:
+Use `/ppp-cloud` for autonomous coding agents. It is designed for clear, bounded, verifiable tasks where the agent should either:
 
 - create one focused draft PR; or
 - stop with a clear blocker explaining why it could not proceed safely.
@@ -237,8 +271,10 @@ See [Cloud agent usage](docs/cloud-agent-usage.md).
 
 - Some skills are broad libraries of composable expert workflows.
 - Some tools are opinionated operating systems for full-stack or product development.
-- PPP is a narrow, practical workflow for everyday engineering tasks.
-- It focuses on a simple loop: inspect first, plan the smallest safe change, prove it before patching broadly, and hand off a reviewable PR.
+- Shape and Ship provide the top-level operating model for the kit.
+- Ship is the coordination layer that picks the safest path for delivery.
+- PPP is the execution loop Ship uses when work is ready and focused.
+- `/ppp-cloud` is the autonomous variant for one bounded task that should end in a draft PR or blocker.
 
 ## Docs and templates
 

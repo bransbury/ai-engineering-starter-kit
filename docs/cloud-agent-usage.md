@@ -1,8 +1,10 @@
 # Cloud agent usage
 
-Use `ppp-cloud` for autonomous coding agents.
+Use `/ppp-cloud` for autonomous coding agents.
 
 > **Prerequisites:** The cloud agent runs on remote infrastructure and cannot access personal skill installs. Run `npx ai-engineering-starter-kit install --repo-local` in the target repo first to commit the skill into `.github/skills/`. See [Repo-local install](../README.md#repo-local-install).
+>
+> The slash form `/ppp-cloud` is the user-facing invocation. The installed skill directory and identifier remain `ppp-cloud`.
 
 It is the non-interactive version of Plan. Patch. Prove.
 
@@ -40,7 +42,7 @@ The cloud agent should either:
 ## Suggested issue/task format
 
 ```md
-Use the `ppp-cloud` skill.
+Use the `/ppp-cloud` skill.
 
 ## Task
 

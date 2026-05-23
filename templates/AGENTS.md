@@ -9,7 +9,7 @@ For normal implementation work:
 - Shape rough or oversized work first: `/shape`
 - Route or coordinate delivery safely: `/ship`
 - Human/IDE use: `/ppp`
-- Autonomous cloud agent use: `ppp-cloud`
+- Autonomous cloud agent use: `/ppp-cloud`
 
 Agents must follow repo instructions and stop for guardrailed work.
 
@@ -20,28 +20,28 @@ Agents must follow repo instructions and stop for guardrailed work.
 | Clarify or split rough work before implementation | `/shape` |
 | Choose the safest delivery path or coordinate multiple tasks | `/ship` |
 | Complete a normal ticket in my IDE | `/ppp` |
-| Create a draft PR from a clear bounded task | `ppp-cloud` |
+| Create a draft PR from a clear bounded task | `/ppp-cloud` |
 | Review a PR or diff | review agent / PR review workflow |
 | Plan architecture | architecture agent or human-led planning |
-| Add or improve tests | `/ppp` or `ppp-cloud` with test-only scope |
+| Add or improve tests | `/ppp` or `/ppp-cloud` with test-only scope |
 | Handle auth/security/migration/API changes | human-led first |
 
 ## Recommended sequences
 
 ### Bug fix / small change
 
-1. Use `/ppp` in IDE, or assign `ppp-cloud` for a clear bounded cloud-agent task.
+1. Use `/ppp` in IDE, or assign `/ppp-cloud` for a clear bounded cloud-agent task.
 2. Review the resulting PR.
 
 ### New feature with unclear architecture
 
 1. Use `/shape` first.
 2. Human reviews/approves plan.
-3. Use `/ship` if routing is still unclear, otherwise use `/ppp` or `ppp-cloud` for the first bounded implementation task.
+3. Use `/ship` if routing is still unclear, otherwise use `/ppp` or `/ppp-cloud` for the first bounded implementation task.
 
 ### Adding tests
 
-1. Use `/ppp` or `ppp-cloud` with test-only scope.
+1. Use `/ppp` or `/ppp-cloud` with test-only scope.
 2. Review tests against behaviour, not implementation details.
 
 ### Review only

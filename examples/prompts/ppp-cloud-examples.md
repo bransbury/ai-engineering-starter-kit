@@ -3,7 +3,7 @@
 ## Simple bug fix
 
 ```md
-Use the `ppp-cloud` skill.
+Use the `/ppp-cloud` skill.
 
 ## Task
 
@@ -27,7 +27,7 @@ Create one focused draft PR.
 ## Test-only task
 
 ```md
-Use the `ppp-cloud` skill.
+Use the `/ppp-cloud` skill.
 
 ## Task
 
@@ -45,7 +45,7 @@ Do not:
 ## Guardrail task
 
 ```md
-Use the `ppp-cloud` skill.
+Use the `/ppp-cloud` skill.
 
 ## Task
 
@@ -80,7 +80,7 @@ These fall under guardrailed decisions (permissions, data migration, tenancy). P
 ### What I found
 
 | Area | File/module | Status | Notes |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Permission policy | `src/permissions/reportPolicy.ts` | Confirmed | Three roles: `owner`, `admin`, `viewer` |
 | Policy call sites | `src/reports/create.ts`, `src/reports/read.ts` | Confirmed | Both call `reportPolicy.can(user, action)` |
 | Migration tooling | — | Missing | No migration scripts found for this area |
@@ -91,7 +91,7 @@ These fall under guardrailed decisions (permissions, data migration, tenancy). P
 2. Confirmation of whether existing saved reports need migrating
 3. Sign-off from the appropriate owner
 
-Once those are clear, this task is a good fit for `ppp-cloud`.
+Once those are clear, this task is a good fit for `/ppp-cloud`.
 
 ---
 

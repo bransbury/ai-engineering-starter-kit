@@ -49,7 +49,7 @@ The following is an example of a good PPP run for the whitespace-only bug fix pr
 ### Current phase: Inspecting
 
 | Area | File/module | Status | Evidence |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Validation logic | `src/reports/validation.ts` | Confirmed | `reportNameSchema` validates `minLength(1)` but does not trim first |
 | Existing tests | `src/reports/validation.test.ts` | Confirmed | Tests for empty string — no test for whitespace-only |
 | Validation call site | `src/reports/create.ts` | Confirmed | Calls `reportNameSchema.parse(name)` directly with no pre-trim |

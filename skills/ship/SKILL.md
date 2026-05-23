@@ -34,7 +34,7 @@ Users should not need to choose between PPP, PPP Cloud, or parallel worktree mod
 ## Core loop
 
 ```text
-Assess → Shape if needed → Route → Execute → Coordinate → Report
+Assess → Shape if needed → Route → Execute → Coordinate → Commit → PR → Report
 ```
 
 ## Principle
@@ -45,7 +45,7 @@ Prefer:
 
 - one good PR over many noisy PRs
 - sequencing over unsafe parallelism
-- the shortest safe delivery plan over a longer fully sequential plan
+- the shortest safe delivery plan that preserves reviewability, ownership, and proof
 - stopping over guessing
 - draft PRs over false confidence
 - explicit contracts over implicit handoffs
@@ -100,13 +100,16 @@ Do not repeatedly ask the user to choose execution modes. Ask only for missing p
 - Do not create worktrees from an unknown or dirty base without handling it.
 - Do not stage or commit unrelated user changes.
 - Do not launch more parallel tasks than humans can review.
-- When multiple safe routes exist, recommend the plan with the fewest serial execution waves.
-- Always look for dependency-aware parallel waves before recommending a fully sequential plan.
+- When multiple routes are equally safe and reviewable, recommend the plan with the fewest serial execution waves.
+- Always look for dependency-aware parallel waves before recommending a fully sequential plan, but do not increase conflict risk or review burden just to reduce wave count.
 - Default maximum parallel tasks: 2.
 - Maximum parallel tasks without explicit approval: 3.
 - Never run more than 4 parallel tasks.
 - Stop after two focused fix attempts per autonomous task.
 - All autonomous or worktree-generated PRs should be draft unless repo instructions say otherwise.
+- After successful validation and review, prepare the commit, push, and PR handoff.
+- Do not commit, push, or create a PR if checks failed, required proof is missing, unrelated user changes would be included, or unresolved blockers remain.
+- Follow repo-specific commit, branch, and PR guidance from `AGENTS.md`, `.github/copilot-instructions.md`, PR templates, or contributor docs.
 
 ## 1. Assess
 
@@ -237,6 +240,7 @@ Stop for human decision when:
 - architecture direction is unclear
 
 Every Ship output must include the routing scorecard, selected route, and confidence.
+
 Every multi-task Ship output must also include the recommended execution waves.
 
 ## 3. Route
@@ -255,11 +259,21 @@ Choose when:
 - risk is medium
 - UI/product judgement may be needed
 
-Apply PPP behaviour:
+Apply PPP behaviour through validation, review, commit, push, and PR handoff:
 
 ```text
-Inspect → Clarify → Plan → Prove → Patch → Validate → Review → PR
+Inspect → Clarify → Plan → Prove → Patch → Validate → Review → Commit → PR
 ```
+
+Do not stop after implementation unless:
+
+- validation failed
+- review found blocking issues
+- a stop condition was hit
+- commit/push/PR permissions are unavailable
+- the user explicitly asked not to create a commit or PR
+
+If commit, push, or PR creation is unavailable, provide exact commands and PR content instead.
 
 ### Path B — Autonomous PPP Cloud execution
 
@@ -272,11 +286,21 @@ Choose when:
 - existing patterns are available
 - no critical decision is needed
 
-Apply PPP Cloud behaviour:
+Apply PPP Cloud behaviour through validation, review, commit, push, and draft PR handoff:
 
 ```text
-Inspect → Decide → Plan → Prove → Patch → Validate → Review → Draft PR
+Inspect → Decide → Plan → Prove → Patch → Validate → Review → Commit → Draft PR
 ```
+
+Do not stop after implementation unless:
+
+- validation failed
+- review found blocking issues
+- a stop condition was hit
+- commit/push/PR permissions are unavailable
+- the task must return a blocker instead of a draft PR
+
+If commit, push, or PR creation is unavailable, provide exact commands and PR content instead.
 
 ### Path C — Shape only
 
@@ -303,6 +327,7 @@ Choose when:
 - branch/worktree/agent capabilities are available or can be requested
 
 Each parallel task uses PPP Cloud behaviour.
+
 Recommend Path D when it materially shortens the safe delivery plan compared with fully sequential execution.
 
 ### Path E — Stop for human decision
@@ -414,7 +439,7 @@ Build an execution-wave plan:
 - each later wave contains every safe task whose dependencies are already satisfied
 - prefer broader safe waves over unnecessary serial execution
 - do not delay an independent task to preserve task-number order
-- if two plans are equally safe, recommend the one with fewer waves
+- if two plans are equally safe and reviewable, recommend the one with fewer waves
 - if a parallel wave would create review overload, reduce the wave size but still prefer the most efficient safe grouping
 
 Use this format:
@@ -509,7 +534,7 @@ Stop if:
 
 ## Output
 
-Create a draft PR with:
+Create a focused commit and draft PR with:
 - summary
 - assumptions
 - checks run
@@ -522,9 +547,11 @@ Create a draft PR with:
 
 ### Single-task execution
 
-If Path A or B is selected, proceed using PPP or PPP Cloud behaviour.
+If Path A or B is selected, proceed using PPP or PPP Cloud behaviour through validation, review, commit, push, and PR handoff.
 
 If the current environment cannot perform required actions, ask permission at the point of need or degrade gracefully.
+
+Do not stop at a summary after implementation. Continue to PR handoff unless blocked.
 
 ### Parallel execution
 
@@ -535,9 +562,11 @@ If Path D is selected:
 3. create or request permission to create worktrees
 4. create deterministic branches
 5. launch or prepare each PPP Cloud task
-6. ensure each task creates a draft PR or blocker
+6. ensure each task creates a focused commit and draft PR, or returns a clear blocker
 7. produce a ship dashboard
 8. define merge order and review focus
+
+Each parallel task must complete the commit, push, and PR handoff section independently.
 
 When Path D is not selected for safety reasons but some later waves can still run in parallel, return the most efficient safe mixed plan instead of a fully serial list.
 
@@ -545,7 +574,119 @@ If the environment cannot launch background agents, create worktrees and task co
 
 Do not treat failure to launch agents as failure of Ship. Degrade to a manual parallel plan when needed.
 
-## 9. Ship dashboard
+## 9. Commit, push, and PR handoff
+
+After implementation, validation, and review are complete, Ship must prepare the work for PR.
+
+This applies to:
+
+- local PPP execution
+- autonomous PPP Cloud execution
+- each worktree task in parallel execution
+
+Before committing:
+
+1. inspect the final diff
+2. confirm the diff matches the selected task scope
+3. confirm unrelated user changes are not staged
+4. confirm required checks/proof have passed or are clearly documented as not run
+5. confirm no stop condition remains unresolved
+
+Use repo-specific guidance for:
+
+- branch naming
+- commit message format
+- PR title format
+- PR body/template
+- draft vs ready-for-review PR status
+
+Look for guidance in:
+
+- `AGENTS.md`
+- `.github/copilot-instructions.md`
+- `.github/PULL_REQUEST_TEMPLATE.md`
+- `CONTRIBUTING.md`
+- nearby repo documentation
+
+### Ticket reference
+
+Before commit/PR creation, identify a ticket reference if the repo convention requires one.
+
+Try, in order:
+
+1. branch name
+2. task text
+3. shaped work
+4. recent commit or PR convention
+5. ask the user only if required and not found
+
+Examples:
+
+```text
+AEP-2714
+MONE-61005
+ENG-123
+#1234
+```
+
+If required by repo convention, include the ticket reference in:
+
+- branch name
+- commit message
+- PR title
+
+### Commit
+
+If permitted by the environment, create a focused commit for the selected task only.
+
+Rules:
+
+- stage only files intentionally changed for this task
+- do not stage unrelated user changes
+- do not commit generated artifacts unless they are part of the task
+- do not commit if validation failed and the PR would not be useful as a draft
+- use the repo’s commit convention if present
+
+If the environment cannot commit, provide exact commands.
+
+### Push
+
+If permitted by the environment, push the branch.
+
+If push permission is unavailable, provide the exact command.
+
+### PR
+
+If permitted by the environment, create a PR.
+
+For local PPP execution:
+
+- create a normal PR when checks passed and review is ready
+- create a draft PR if validation is incomplete, review is still needed, or repo convention prefers draft PRs for AI-assisted work
+
+For autonomous PPP Cloud or worktree execution:
+
+- create a draft PR unless repo instructions say otherwise
+
+PR body must include:
+
+- summary
+- scope
+- assumptions
+- checks run
+- checks not run
+- risks / follow-ups
+- review focus
+- links to related PRs or dependencies, if any
+
+If the environment cannot create a PR, provide:
+
+- commit message
+- PR title
+- PR body
+- exact `git` / `gh` commands to run
+
+## 10. Ship dashboard
 
 For multi-task or parallel work, return:
 
@@ -562,8 +703,8 @@ Execution mode:
 Recommended execution waves:
 - ...
 
-| Task | Branch | Worktree | Mode | Status | PR | Merge order | Review focus |
-|---|---|---|---|---|---|---|---|
+| Task | Branch | Worktree | Mode | Commit | PR | Status | Merge order | Review focus |
+|---|---|---|---|---|---|---|---|---|
 
 Not delegated:
 | Task | Reason |
@@ -582,7 +723,7 @@ Next actions:
 - ...
 ```
 
-## 10. Stop formats
+## 11. Stop formats
 
 ### Shape needed
 
@@ -649,6 +790,9 @@ Always return one of:
 - `shaped-only`
 - `parallel-plan-created`
 - `parallel-execution-started`
+- `pr-created`
+- `draft-pr-created`
+- `pr-handoff-created`
 - `stopped-human-decision`
 - `stopped-capability-unavailable`
 - `stopped-unsafe`
@@ -663,5 +807,8 @@ For every output include:
 - checks/proof
 - risks
 - next actions
-- PR links if created
+- commit created or commit command
+- push completed or push command
+- PR link or PR creation command
+- PR title and body
 - blockers if any
