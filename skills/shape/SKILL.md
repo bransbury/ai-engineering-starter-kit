@@ -1,6 +1,6 @@
 ---
 name: shape
-version: 0.8.0
+version: 0.7.0
 description: "Shape rough work into clear, scoped, testable PR-sized tasks for PPP, PPP Cloud, or Ship orchestration."
 ---
 
