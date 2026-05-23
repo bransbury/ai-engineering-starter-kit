@@ -20,6 +20,8 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
 SKILL_FILES = [
     ROOT / "skills" / "ppp" / "SKILL.md",
     ROOT / "skills" / "ppp-cloud" / "SKILL.md",
+    ROOT / "skills" / "shape" / "SKILL.md",
+    ROOT / "skills" / "ship" / "SKILL.md",
 ]
 PACKAGE_JSON = ROOT / "package.json"
 CHANGELOG = ROOT / "CHANGELOG.md"

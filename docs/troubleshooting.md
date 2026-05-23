@@ -9,14 +9,17 @@ Use the Plan. Patch. Prove workflow on this prompt:
 <paste prompt>
 ```
 
-Check the skill is installed at one of:
+Check the relevant skill is installed at one of:
 
 ```text
-~/.agents/skills/ppp/SKILL.md
-~/.copilot/skills/ppp/SKILL.md
-.agents/skills/ppp/SKILL.md
-.github/skills/ppp/SKILL.md
+~/.agents/skills/<skill-name>/SKILL.md
+~/.claude/skills/<skill-name>/SKILL.md
+~/.copilot/skills/<skill-name>/SKILL.md
+.agents/skills/<skill-name>/SKILL.md
+.github/skills/<skill-name>/SKILL.md
 ```
+
+Where `<skill-name>` is `shape`, `ship`, `ppp`, or `ppp-cloud`.
 
 ## It starts coding too early
 

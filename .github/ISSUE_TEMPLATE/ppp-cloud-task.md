@@ -1,12 +1,12 @@
 ---
 name: PPP Cloud task
-about: Assign a clear, bounded task to an autonomous cloud coding agent using ppp-cloud
+about: Assign a clear, bounded task to an autonomous cloud coding agent using /ppp-cloud
 title: "[ppp-cloud] "
 labels: []
 assignees: []
 ---
 
-Use the `ppp-cloud` skill.
+Use the `/ppp-cloud` skill.
 
 ## Task
 
