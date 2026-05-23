@@ -4,7 +4,7 @@
 
 Good contributions include:
 
-- improvements to the PPP or PPP Cloud skill definitions
+- improvements to the shipped skill definitions (`shape`, `ship`, `ppp`, or `ppp-cloud`)
 - new or improved examples
 - fixes to docs that are unclear or wrong
 - improvements to the install/uninstall scripts
@@ -14,13 +14,13 @@ Before working on a large change, open an issue to discuss the direction first.
 
 ## Skill changes
 
-The skills (`skills/ppp/SKILL.md` and `skills/ppp-cloud/SKILL.md`) are the core of this project. Changes to them should:
+The shipped skills (`skills/shape/SKILL.md`, `skills/ship/SKILL.md`, `skills/ppp/SKILL.md`, and `skills/ppp-cloud/SKILL.md`) are the core of this project. Changes to them should:
 
 - solve a real problem observed in practice, not a theoretical one
 - not add complexity without clear benefit
 - preserve the hard rules and safety properties
 - keep token discipline — skills should stay concise and scannable
-- keep the two skills consistent where sections are shared (marked `<!-- Shared with ... — keep in sync -->`)
+- keep related skills consistent where sections are shared (marked `<!-- Shared with ... — keep in sync -->`)
 
 Changes that weaken safety rules, add unnecessary verbosity, or introduce model-specific hacks will not be merged.
 

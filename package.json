@@ -1,7 +1,7 @@
 {
   "name": "ai-engineering-starter-kit",
-  "version": "0.6.0",
-  "description": "Plan. Patch. Prove. Practical AI-assisted engineering workflows for IDE and cloud coding agents.",
+  "version": "0.7.0",
+  "description": "Practical AI-assisted engineering workflows for shaping, executing, and shipping software changes.",
   "license": "MIT",
   "private": false,
   "type": "commonjs",

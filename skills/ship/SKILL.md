@@ -1,5 +1,6 @@
 ---
 name: ship
+version: 0.7.0
 description: "Choose and coordinate the safest delivery path for AI-assisted engineering work: shape if needed, run PPP, use PPP Cloud, or coordinate parallel worktree tasks."
 ---
 

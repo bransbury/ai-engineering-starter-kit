@@ -2,7 +2,7 @@
 set -euo pipefail
 
 for root in "$HOME/.agents/skills" "$HOME/.claude/skills" "$HOME/.copilot/skills"; do
-  for skill in ppp ppp-cloud; do
+  for skill in ppp ppp-cloud shape ship; do
     target="$root/$skill"
     if [[ -d "$target" ]]; then
       rm -rf "$target"

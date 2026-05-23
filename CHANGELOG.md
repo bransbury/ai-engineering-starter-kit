@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+- Added `shape` and `ship` as first-class shipped skills in the installers and uninstallers.
+- Versioned all shipped skills consistently and updated release automation to validate and bump all four skills.
+- Updated README, setup docs, troubleshooting, and templates to explain when to use `shape`, `ship`, `/ppp`, and `ppp-cloud`.
+
 ## 0.6.0
 
 - Improved README intro and surfaced the setup decision table earlier.

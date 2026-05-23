@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILL_FILES = sorted((ROOT / "skills").glob("*/SKILL.md"))
 DESCRIPTION_LIMIT = 320
+SEMVER_RE = re.compile(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?")
 
 
 def validate_skill(path: Path) -> list[str]:
@@ -33,6 +34,7 @@ def validate_skill(path: Path) -> list[str]:
 
     frontmatter_lines = lines[1:closing_index] if closing_index != -1 else []
     name = None
+    version = None
     description = None
 
     for raw_line in frontmatter_lines:
@@ -43,6 +45,8 @@ def validate_skill(path: Path) -> list[str]:
         value = value.strip()
         if key == "name":
             name = value
+        elif key == "version":
+            version = value
         elif key == "description":
             description = value
 
@@ -50,6 +54,11 @@ def validate_skill(path: Path) -> list[str]:
         errors.append(f"{path}: frontmatter must include a non-empty name")
     elif not name.strip():
         errors.append(f"{path}: frontmatter name must not be empty")
+
+    if version is None:
+        errors.append(f"{path}: frontmatter must include version")
+    elif not SEMVER_RE.fullmatch(version):
+        errors.append(f"{path}: version must be a semver string")
 
     if description is None:
         errors.append(f"{path}: frontmatter must include description")

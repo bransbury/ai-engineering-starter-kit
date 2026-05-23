@@ -1,6 +1,6 @@
 ---
 name: ppp
-version: 0.6.0
+version: 0.7.0
 description: "Plan. Patch. Prove. A lightweight interactive workflow for normal engineering tasks: inspect code, clarify only blocking questions, plan the smallest safe complete change, prove it, patch in small loops, review production readiness, and prepare a PR."
 ---
 
