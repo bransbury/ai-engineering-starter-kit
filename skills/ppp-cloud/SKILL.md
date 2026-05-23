@@ -137,7 +137,7 @@ Identify:
 Use a codebase inspection table when file paths or modules matter:
 
 | Area | File/module | Status | Evidence | Notes |
-|---|---|---|---|---|
+| --- | ----------- | ------ | -------- | ----- |
 
 Statuses:
 

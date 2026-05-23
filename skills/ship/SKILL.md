@@ -174,7 +174,7 @@ Before selecting the path, score the work from 1–5.
 Use inspected code where possible. If a score is inferred from task text only, mark confidence as lower.
 
 | Dimension | Meaning |
-|---|---|
+| --- | --- |
 | Clarity | Expected behaviour is explicit |
 | Boundedness | Scope fits one coherent PR |
 | Verifiability | Proof is clear and runnable |
