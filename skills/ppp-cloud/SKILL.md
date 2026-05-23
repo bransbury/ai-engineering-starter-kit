@@ -1,6 +1,6 @@
 ---
 name: ppp-cloud
-version: 0.6.0
+version: 0.7.0
 description: "Plan. Patch. Prove for autonomous cloud agents. Use for clear, bounded engineering tasks where the agent should inspect code, plan, prove, patch, validate, review, and open a draft PR or stop with a useful blocker."
 ---
 
@@ -137,7 +137,7 @@ Identify:
 Use a codebase inspection table when file paths or modules matter:
 
 | Area | File/module | Status | Evidence | Notes |
-|---|---|---|---|---|
+| --- | ----------- | ------ | -------- | ----- |
 
 Statuses:
 

@@ -158,7 +158,7 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-log "PPP installer"
+log "AI Engineering Starter Kit installer"
 log "Version: $(skill_version "ppp")"
 if (( DRY_RUN )); then
   log "Mode: dry-run"
@@ -174,6 +174,12 @@ install_skill "ppp" "$HOME/.copilot/skills"
 install_skill "ppp-cloud" "$HOME/.agents/skills"
 install_skill "ppp-cloud" "$HOME/.claude/skills"
 install_skill "ppp-cloud" "$HOME/.copilot/skills"
+install_skill "shape" "$HOME/.agents/skills"
+install_skill "shape" "$HOME/.claude/skills"
+install_skill "shape" "$HOME/.copilot/skills"
+install_skill "ship" "$HOME/.agents/skills"
+install_skill "ship" "$HOME/.claude/skills"
+install_skill "ship" "$HOME/.copilot/skills"
 
 echo
 if [[ -d ".cursor" ]]; then

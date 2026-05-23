@@ -72,7 +72,7 @@ This document now describes the intended behavior of that implementation and the
 - The tagged commit must pass release-critical validation in the release workflow.
 - `CHANGELOG.md` must contain a section matching the tag version without the `v` prefix.
   - Example: tag `v0.3.0` requires `## 0.3.0` in `CHANGELOG.md`.
-- `skills/ppp/SKILL.md` and `skills/ppp-cloud/SKILL.md` must have frontmatter `version` values matching the release version.
+- `skills/ppp/SKILL.md`, `skills/ppp-cloud/SKILL.md`, `skills/shape/SKILL.md`, and `skills/ship/SKILL.md` must have frontmatter `version` values matching the release version.
   - Example: tag `v0.3.0` requires `version: 0.3.0`.
 - `package.json` must have a `version` value matching the release version.
   - Example: tag `v0.5.0` requires `"version": "0.5.0"`.

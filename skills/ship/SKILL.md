@@ -1,5 +1,6 @@
 ---
 name: ship
+version: 0.7.0
 description: "Choose and coordinate the safest delivery path for AI-assisted engineering work: shape if needed, run PPP, use PPP Cloud, or coordinate parallel worktree tasks."
 ---
 
@@ -44,6 +45,7 @@ Prefer:
 
 - one good PR over many noisy PRs
 - sequencing over unsafe parallelism
+- the shortest safe delivery plan over a longer fully sequential plan
 - stopping over guessing
 - draft PRs over false confidence
 - explicit contracts over implicit handoffs
@@ -98,6 +100,8 @@ Do not repeatedly ask the user to choose execution modes. Ask only for missing p
 - Do not create worktrees from an unknown or dirty base without handling it.
 - Do not stage or commit unrelated user changes.
 - Do not launch more parallel tasks than humans can review.
+- When multiple safe routes exist, recommend the plan with the fewest serial execution waves.
+- Always look for dependency-aware parallel waves before recommending a fully sequential plan.
 - Default maximum parallel tasks: 2.
 - Maximum parallel tasks without explicit approval: 3.
 - Never run more than 4 parallel tasks.
@@ -118,6 +122,7 @@ Determine:
 - Does it require a human decision?
 - Does it involve guardrailed areas?
 - Are there independent parallelizable tasks?
+- What is the shortest safe dependency-aware execution plan?
 
 Guardrailed areas:
 
@@ -169,7 +174,7 @@ Before selecting the path, score the work from 1–5.
 Use inspected code where possible. If a score is inferred from task text only, mark confidence as lower.
 
 | Dimension | Meaning |
-|---|---|
+| --- | --- |
 | Clarity | Expected behaviour is explicit |
 | Boundedness | Scope fits one coherent PR |
 | Verifiability | Proof is clear and runnable |
@@ -232,6 +237,7 @@ Stop for human decision when:
 - architecture direction is unclear
 
 Every Ship output must include the routing scorecard, selected route, and confidence.
+Every multi-task Ship output must also include the recommended execution waves.
 
 ## 3. Route
 
@@ -297,6 +303,7 @@ Choose when:
 - branch/worktree/agent capabilities are available or can be requested
 
 Each parallel task uses PPP Cloud behaviour.
+Recommend Path D when it materially shortens the safe delivery plan compared with fully sequential execution.
 
 ### Path E — Stop for human decision
 
@@ -400,6 +407,28 @@ Rules:
 - tasks touching the same files should usually be sequenced
 - coordination files may have only one owner
 - unexpected need to edit a forbidden/shared file requires stop and report
+
+Build an execution-wave plan:
+
+- wave 1 contains the smallest required foundation work
+- each later wave contains every safe task whose dependencies are already satisfied
+- prefer broader safe waves over unnecessary serial execution
+- do not delay an independent task to preserve task-number order
+- if two plans are equally safe, recommend the one with fewer waves
+- if a parallel wave would create review overload, reduce the wave size but still prefer the most efficient safe grouping
+
+Use this format:
+
+```md
+## Recommended execution waves
+
+1. Wave 1: T1
+2. Wave 2: T2, T3, T4
+3. Wave 3: T5, T6
+
+Why this is the recommended plan:
+- ...
+```
 
 Create a touch map:
 
@@ -510,6 +539,8 @@ If Path D is selected:
 7. produce a ship dashboard
 8. define merge order and review focus
 
+When Path D is not selected for safety reasons but some later waves can still run in parallel, return the most efficient safe mixed plan instead of a fully serial list.
+
 If the environment cannot launch background agents, create worktrees and task contracts if possible, or provide exact commands and prompts.
 
 Do not treat failure to launch agents as failure of Ship. Degrade to a manual parallel plan when needed.
@@ -527,6 +558,9 @@ Base:
 
 Execution mode:
 - local / autonomous / parallel worktree / shaped only / stopped
+
+Recommended execution waves:
+- ...
 
 | Task | Branch | Worktree | Mode | Status | PR | Merge order | Review focus |
 |---|---|---|---|---|---|---|---|

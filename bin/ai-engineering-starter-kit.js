@@ -7,7 +7,7 @@ const readline = require("readline");
 
 const root = path.resolve(__dirname, "..");
 const home = os.homedir();
-const skills = ["ppp", "ppp-cloud"];
+const skills = ["ppp", "ppp-cloud", "shape", "ship"];
 const personalTargets = [
   path.join(home, ".agents", "skills"),
   path.join(home, ".claude", "skills"),
@@ -201,7 +201,7 @@ async function installCursorRule(options) {
 async function install(options) {
   const targetRoots = options.repoLocal ? repoLocalTargets : personalTargets;
 
-  log("PPP installer");
+  log("AI Engineering Starter Kit installer");
   log(`Version: ${skillVersion("ppp")}`);
   if (options.repoLocal) {
     log("Mode: repo-local");
