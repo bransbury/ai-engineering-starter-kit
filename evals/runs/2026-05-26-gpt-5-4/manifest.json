@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-05-26-gpt-5-4",
+  "created_at": "2026-05-24T15:33:50.418656+00:00",
+  "repo_commit": "2b02289cfb29cf0cec60c219cecf35271271f9a7",
+  "cases_dir": "evals/cases",
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-4",
+    "version": "gpt-5-4",
+    "temperature": "",
+    "top_p": "",
+    "reasoning_effort": "medium"
+  },
+  "agent": {
+    "name": "vscode"
+  },
+  "notes": "",
+  "reproducibility": {
+    "instructions": [
+      "Use a fresh session/thread per case.",
+      "Keep the same model, provider, tool environment, and exposed sampling settings for the whole run.",
+      "Do not mix responses from different commits or different skill versions in one run.",
+      "Exact output identity is not guaranteed by most LLM providers; compare scores and drift, not just byte-for-byte text."
+    ]
+  }
+}

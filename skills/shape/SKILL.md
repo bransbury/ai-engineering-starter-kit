@@ -1,6 +1,6 @@
 ---
 name: shape
-version: 0.7.0
+version: 0.8.0
 description: "Shape rough work into clear, scoped, testable PR-sized tasks for PPP, PPP Cloud, or Ship orchestration."
 ---
 
@@ -42,6 +42,7 @@ Be concise.
 - Preserve important constraints, assumptions, and risks.
 - Prefer tables for task maps.
 - Do not create artifacts unless the user asks or the work is multi-PR and needs coordination state.
+- Default to minimal useful output, but keep the context users need to steer: important assumptions, open questions, risks, proof ideas, and routing rationale.
 
 ## When to use Shape
 
@@ -63,7 +64,7 @@ Do not use Shape for a tiny clear task that is already ready for PPP.
 - Do not create implementation tasks before understanding the goal.
 - Do not invent requirements.
 - Ask only blocking or high-impact questions.
-- Confirm high-impact decisions and routing recommendations interactively before treating the work as ready to ship.
+- Confirm only high-impact decisions and routing recommendations interactively before treating the work as ready to ship.
 - Use recommended defaults for low-risk ambiguity.
 - Stop for critical product, security, auth, data, migration, tenancy, billing, or public API decisions.
 - Always identify the smallest safe first PR when possible.
@@ -71,7 +72,7 @@ Do not use Shape for a tiny clear task that is already ready for PPP.
 - Do not mark tasks independent without evidence.
 - Do not recommend parallel execution unless tasks are clear, low-risk, independently provable, and unlikely to conflict.
 - Present one decision or recommendation at a time, with option `1` as the recommended choice.
-- Wait for user confirmation before moving to the next decision or recommendation.
+- Wait for user confirmation before moving to the next decision or recommendation when a real decision is required.
 
 ## Question policy
 
@@ -111,9 +112,34 @@ Use this format:
 
 If high-impact ambiguity remains, still provide a partial shape, but mark status as `needs-human-decision`.
 
+When shaping stops or pauses for a human decision:
+
+- say exactly why shaping cannot safely continue
+- say what is already safe and shaped
+- say what remains intentionally unshaped
+- give the smallest next shaped task that becomes safe once the decision is answered
+- recommend the safest next route after the answer
+
+Minimise human rediscovery work. Do not force the user to reconstruct what was already learned.
+
 ## Confirmation policy
 
-Before passing work to `/ship`, confirm shaping decisions and routing recommendations interactively.
+Before passing work to `/ship`, confirm shaping decisions and routing recommendations interactively only when they are material.
+
+Do not trigger confirmation for:
+
+- low-risk defaults
+- obvious routing
+- minor naming or wording choices
+- assumptions that are reversible and do not affect behaviour, proof, or task boundaries
+
+Trigger confirmation for:
+
+- product behaviour choices
+- scope trade-offs that change the first PR
+- proof strategy changes with cost or risk implications
+- routing decisions where more than one path is plausibly safe
+- dependency or sequencing decisions that affect delivery structure
 
 Use this flow:
 
@@ -532,6 +558,15 @@ PR-size assessment:
 ## Human decisions needed
 ...
 
+## Safe to proceed now
+- ...
+
+## Remaining ambiguity
+- ...
+
+## Smallest next shaped task after answer
+- ...
+
 ## Ready-to-ship prompt
 
 1. Recommended: Pass to `/ship`
@@ -586,6 +621,21 @@ Recommended options:
 Recommended option:
 - ...
 
-What can be shaped now:
+Why this blocks safe shaping:
+- ...
+
+What is already safe and shaped:
+- ...
+
+What remains intentionally unshaped:
+- ...
+
+Smallest next shaped task after answer:
+- ...
+
+Safest next route after answer:
+- `/ppp` / `/ppp-cloud` / `/ship` / continue shaping
+
+What can proceed now without that decision:
 - ...
 ```

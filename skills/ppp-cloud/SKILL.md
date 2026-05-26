@@ -1,6 +1,6 @@
 ---
 name: ppp-cloud
-version: 0.7.0
+version: 0.8.0
 description: "Plan. Patch. Prove for autonomous cloud agents. Use for clear, bounded engineering tasks where the agent should inspect code, plan, prove, patch, validate, review, and open a draft PR or stop with a useful blocker."
 ---
 
@@ -35,6 +35,7 @@ Be concise.
 - Do not restate large specs or issue bodies.
 - Do not create separate task artifacts unless repo instructions require them.
 - Keep the PR body useful but not verbose.
+- Default to minimal useful output. Keep rationale compact, but preserve important assumptions, proof choices, skipped checks, and blockers.
 
 ## Suitable tasks
 
@@ -253,6 +254,12 @@ Choose exactly one primary proof and up to three supporting checks.
 
 The primary proof must directly validate the changed behaviour. Lint/typecheck alone is not sufficient for behavioural changes unless no behavioural proof is practical.
 
+Choose proof by behavioural directness first, then by cost:
+
+1. the proof that most directly exercises the changed behaviour
+2. the cheapest proof among equally direct options
+3. broader supporting checks only when they reduce a real residual risk
+
 Use the lowest-cost proof that gives meaningful confidence:
 
 - Static/local sanity: lint, typecheck, build affected package
@@ -260,6 +267,22 @@ Use the lowest-cost proof that gives meaningful confidence:
 - Focused integration/API/contract test: for cross-module or API behaviour
 - E2E/manual workflow: when a real workflow is needed
 - Full suite/expensive checks: only when repo convention or risk requires it
+
+Prefer one targeted proof command over broad validation bundles unless broader checks are clearly required by risk or repo rules.
+
+Never substitute breadth for relevance. A full suite that does not meaningfully exercise the changed behaviour is weaker than one targeted behavioural proof that does.
+
+Prefer proofs that:
+
+- exercise the changed user-visible or contract-visible behaviour directly
+- fail if the intended behaviour regresses
+- isolate the affected area enough to speed iteration
+
+Avoid proof plans that rely mainly on:
+
+- lint/typecheck/build when behaviour changed
+- snapshots or implementation-detail assertions without behavioural checks
+- large undifferentiated test bundles when one targeted test would prove the change more directly
 
 Prefer red-green testing where practical.
 
@@ -283,6 +306,12 @@ If unit tests are not practical or not applicable:
 - explain why unit tests are not being added.
 
 Do not write tests that only assert implementation details rather than behaviour.
+
+Prefer tests that answer:
+
+- what behaviour changed?
+- where would a regression show up?
+- what is the cheapest repeatable proof of that behaviour?
 
 If CI/CD enforces unit coverage, do not open a normal PR that is likely to fail coverage. Add tests, mark the PR as draft, or stop with a blocker if the issue cannot be addressed.
 
@@ -347,12 +376,16 @@ Current evidence:
 - key error:
 - likely cause:
 - files touched:
+- proof gap:
+- smallest next resumable task:
 
 Recommended next action:
 Human investigation required.
 ```
 
 Do not weaken tests, delete validation, broaden scope, or keep retrying indefinitely.
+
+In the PR body and final review, make the primary proof highly visible. Prefer one decisive behaviour-validating check over a long list of generic checks.
 
 ## 7. Review
 

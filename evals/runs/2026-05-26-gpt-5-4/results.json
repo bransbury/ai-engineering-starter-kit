@@ -1,0 +1,2495 @@
+{
+  "schema_version": 3,
+  "generated_at": "2026-05-26T12:01:42.477340+00:00",
+  "repo_commit": "2b02289cfb29cf0cec60c219cecf35271271f9a7",
+  "run_dir": "evals/runs/2026-05-26-gpt-5-4",
+  "responses_dir": "evals/runs/2026-05-26-gpt-5-4/responses",
+  "manifest": {
+    "run_id": "2026-05-26-gpt-5-4",
+    "created_at": "2026-05-24T15:33:50.418656+00:00",
+    "repo_commit": "2b02289cfb29cf0cec60c219cecf35271271f9a7",
+    "cases_dir": "evals/cases",
+    "model": {
+      "provider": "openai",
+      "name": "gpt-5-4",
+      "version": "gpt-5-4",
+      "temperature": "",
+      "top_p": "",
+      "reasoning_effort": "medium"
+    },
+    "agent": {
+      "name": "vscode"
+    },
+    "notes": "",
+    "reproducibility": {
+      "instructions": [
+        "Use a fresh session/thread per case.",
+        "Keep the same model, provider, tool environment, and exposed sampling settings for the whole run.",
+        "Do not mix responses from different commits or different skill versions in one run.",
+        "Exact output identity is not guaranteed by most LLM providers; compare scores and drift, not just byte-for-byte text."
+      ]
+    }
+  },
+  "fingerprints": {
+    "cases": {
+      "ppp-cloud-auth-unclear": {
+        "case_file": "evals/cases/ppp-cloud-auth-unclear.json",
+        "case_sha256": "f7411c2716e5b8868bcc01466d84fad67187b84b7ef8b9acfe2de26bc92427d8",
+        "prompt_file": "evals/prompts/ppp-cloud-auth-unclear.md",
+        "prompt_sha256": "0f64c4fa88f7e87f0ddc8149f24191c9841e638ed3cfb691c4db01e1b6133eda"
+      },
+      "ppp-cloud-ui-empty-state": {
+        "case_file": "evals/cases/ppp-cloud-ui-empty-state.json",
+        "case_sha256": "974813b46660a10053a2bfbb4690b21db3ceb763648d950498759c54ee9998ae",
+        "prompt_file": "examples/tickets/ui-empty-state.md",
+        "prompt_sha256": "12ecf6ef35d49a9cfb0391208d59e38f84b0f3022b738e117347482cef468e74"
+      },
+      "ppp-failing-test": {
+        "case_file": "evals/cases/ppp-failing-test.json",
+        "case_sha256": "e461a42e5faefd09aaea6dc417820f1ed9878e024715a85e27b1ea6162713743",
+        "prompt_file": "examples/tickets/failing-test.md",
+        "prompt_sha256": "73d6162e9322a829310844c7b832211d5143e0dea26aea02eaf6ac57b14925ab"
+      },
+      "ppp-proof-trap": {
+        "case_file": "evals/cases/ppp-proof-trap.json",
+        "case_sha256": "c77d270f1ef7e9457d76cbc7ff8b5f3bf2ea0dc632ac351879ea38da586594ae",
+        "prompt_file": "evals/prompts/ppp-proof-trap.md",
+        "prompt_sha256": "2a54a42d83d8ae5e202e59f6a92f779ff59c9ff44fd132b885c599de1d17ced0"
+      },
+      "ppp-small-bug": {
+        "case_file": "evals/cases/ppp-small-bug.json",
+        "case_sha256": "0e3e5a4170b544705979a72c4ae27e1d43af5a4099644ce63c23f2d87f942c18",
+        "prompt_file": "examples/tickets/small-bug-fix.md",
+        "prompt_sha256": "37e8e5e502813d8b4b9b95a1562902bef089133bdd023a0d0f4946355ad830d4"
+      },
+      "shape-clear-small-bug": {
+        "case_file": "evals/cases/shape-clear-small-bug.json",
+        "case_sha256": "e4d30a8c56b8e2b7f0dec54d6d8a96c54127c1c9495943fa7a09185c9b736550",
+        "prompt_file": "examples/tickets/small-bug-fix.md",
+        "prompt_sha256": "37e8e5e502813d8b4b9b95a1562902bef089133bdd023a0d0f4946355ad830d4"
+      },
+      "shape-large-feature": {
+        "case_file": "evals/cases/shape-large-feature.json",
+        "case_sha256": "a6a2d7f52467744e0f6ee7d92e9883eb355f2220393a992b67aaabd096a5010a",
+        "prompt_file": "examples/tickets/large-feature-too-big.md",
+        "prompt_sha256": "12de7fe187317a5dafdf504763efc7f0f594c40fec9ab7163a6a712dc00d5607"
+      },
+      "shape-public-api-ambiguity": {
+        "case_file": "evals/cases/shape-public-api-ambiguity.json",
+        "case_sha256": "a205d35cd4d63077b7b0d6ed5883e4b7db1ebe0a27e26fc658ec9219a332c435",
+        "prompt_file": "evals/prompts/shape-public-api-ambiguity.md",
+        "prompt_sha256": "8da21285c0793ed1fe6294c7afebe75c69a634b6ad97e2235b7a3493c186b3ed"
+      },
+      "ship-foundation-first": {
+        "case_file": "evals/cases/ship-foundation-first.json",
+        "case_sha256": "8f1867b87b279b258d3371beecd79940cd7a70fd226077718d7ec90039d49584",
+        "prompt_file": "evals/prompts/ship-foundation-first.md",
+        "prompt_sha256": "5b2f66d49c6ee096d49a226566b35d8b2ff31b7156f990d5d5f3deaed63bcfed"
+      },
+      "ship-review-burden": {
+        "case_file": "evals/cases/ship-review-burden.json",
+        "case_sha256": "30b3117ba14e44284551d633db4353e5178b916cab0ac8e95cb8f4bb797ccb5f",
+        "prompt_file": "evals/prompts/ship-review-burden.md",
+        "prompt_sha256": "32c26434514c05c27beb55aff18d95225fed58029c167e43dcb8dd0d398e729c"
+      }
+    },
+    "skills": {
+      "ppp": {
+        "path": "skills/ppp/SKILL.md",
+        "sha256": "1d5466e179315171f8d0543365a9b9ca9d975cbd029828d96cd3c72dbd18f5ea"
+      },
+      "ppp-cloud": {
+        "path": "skills/ppp-cloud/SKILL.md",
+        "sha256": "0f2db6ae1b8ae1b782744d1bd88d11af4fa4aa6383b0f928c9ba7557b48f5d5e"
+      },
+      "shape": {
+        "path": "skills/shape/SKILL.md",
+        "sha256": "b46092b9ee5417d33c0c5e21d2076a6bca87757398af4b5af5fa84840538f91d"
+      },
+      "ship": {
+        "path": "skills/ship/SKILL.md",
+        "sha256": "957e917d8fa34080ee0b6618f78a59a977714d96d1d976659c8647db370d60c2"
+      }
+    },
+    "combined_sha256": "db94cc75d3edaf5377d1870d6f0c6df0fe80a98ffccd080e9dd0406da7f25dcc"
+  },
+  "totals": {
+    "reward_score": 112.0,
+    "max_score": 115.0,
+    "penalty_score": -2.0,
+    "raw_net_score": 110.0,
+    "score": 110.0,
+    "percent": 95.7
+  },
+  "dimensions": {
+    "risk_routing": {
+      "reward_score": 8.0,
+      "max_score": 8.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 8.0,
+      "score": 8.0,
+      "percent": 100.0,
+      "criteria_count": 6.0,
+      "matched_count": 4.0
+    },
+    "blocker_handoff": {
+      "reward_score": 18.0,
+      "max_score": 18.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 18.0,
+      "score": 18.0,
+      "percent": 100.0,
+      "criteria_count": 8.0,
+      "matched_count": 8.0
+    },
+    "preferred_choice": {
+      "reward_score": 18.0,
+      "max_score": 18.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 18.0,
+      "score": 18.0,
+      "percent": 100.0,
+      "criteria_count": 7.0,
+      "matched_count": 7.0
+    },
+    "execution_discipline": {
+      "reward_score": 0.0,
+      "max_score": 0.0,
+      "penalty_score": -2.0,
+      "raw_net_score": -2.0,
+      "score": 0.0,
+      "percent": 0.0,
+      "criteria_count": 7.0,
+      "matched_count": 1.0
+    },
+    "scope": {
+      "reward_score": 9.0,
+      "max_score": 12.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 9.0,
+      "score": 9.0,
+      "percent": 75.0,
+      "criteria_count": 7.0,
+      "matched_count": 6.0
+    },
+    "pattern_reuse": {
+      "reward_score": 2.0,
+      "max_score": 2.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 2.0,
+      "score": 2.0,
+      "percent": 100.0,
+      "criteria_count": 1.0,
+      "matched_count": 1.0
+    },
+    "proof": {
+      "reward_score": 19.0,
+      "max_score": 19.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 19.0,
+      "score": 19.0,
+      "percent": 100.0,
+      "criteria_count": 10.0,
+      "matched_count": 10.0
+    },
+    "handoff": {
+      "reward_score": 4.0,
+      "max_score": 4.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 4.0,
+      "score": 4.0,
+      "percent": 100.0,
+      "criteria_count": 2.0,
+      "matched_count": 2.0
+    },
+    "diagnosis": {
+      "reward_score": 2.0,
+      "max_score": 2.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 2.0,
+      "score": 2.0,
+      "percent": 100.0,
+      "criteria_count": 1.0,
+      "matched_count": 1.0
+    },
+    "debug_loop": {
+      "reward_score": 4.0,
+      "max_score": 4.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 4.0,
+      "score": 4.0,
+      "percent": 100.0,
+      "criteria_count": 2.0,
+      "matched_count": 2.0
+    },
+    "inspection": {
+      "reward_score": 3.0,
+      "max_score": 3.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 3.0,
+      "score": 3.0,
+      "percent": 100.0,
+      "criteria_count": 2.0,
+      "matched_count": 2.0
+    },
+    "routing": {
+      "reward_score": 12.0,
+      "max_score": 12.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 12.0,
+      "score": 12.0,
+      "percent": 100.0,
+      "criteria_count": 8.0,
+      "matched_count": 7.0
+    },
+    "interaction": {
+      "reward_score": 0.0,
+      "max_score": 0.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 0.0,
+      "score": 0.0,
+      "percent": 0.0,
+      "criteria_count": 1.0,
+      "matched_count": 0.0
+    },
+    "dependency_planning": {
+      "reward_score": 2.0,
+      "max_score": 2.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 2.0,
+      "score": 2.0,
+      "percent": 100.0,
+      "criteria_count": 1.0,
+      "matched_count": 1.0
+    },
+    "wave_planning": {
+      "reward_score": 4.0,
+      "max_score": 4.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 4.0,
+      "score": 4.0,
+      "percent": 100.0,
+      "criteria_count": 3.0,
+      "matched_count": 3.0
+    },
+    "reviewability": {
+      "reward_score": 7.0,
+      "max_score": 7.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 7.0,
+      "score": 7.0,
+      "percent": 100.0,
+      "criteria_count": 3.0,
+      "matched_count": 3.0
+    }
+  },
+  "per_skill": {
+    "ppp-cloud": {
+      "reward_score": 22.0,
+      "max_score": 22.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 22.0,
+      "score": 22.0,
+      "percent": 100.0,
+      "dimensions": {
+        "risk_routing": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "blocker_handoff": {
+          "reward_score": 6.0,
+          "max_score": 6.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 6.0,
+          "score": 6.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "preferred_choice": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        },
+        "scope": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "pattern_reuse": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "proof": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "handoff": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    "ppp": {
+      "reward_score": 35.0,
+      "max_score": 35.0,
+      "penalty_score": -2.0,
+      "raw_net_score": 33.0,
+      "score": 33.0,
+      "percent": 94.3,
+      "dimensions": {
+        "proof": {
+          "reward_score": 13.0,
+          "max_score": 13.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 13.0,
+          "score": 13.0,
+          "percent": 100.0,
+          "criteria_count": 7.0,
+          "matched_count": 7.0
+        },
+        "diagnosis": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "debug_loop": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "blocker_handoff": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "preferred_choice": {
+          "reward_score": 5.0,
+          "max_score": 5.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 5.0,
+          "score": 5.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": -2.0,
+          "raw_net_score": -2.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 5.0,
+          "matched_count": 1.0
+        },
+        "inspection": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "scope": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "handoff": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    "shape": {
+      "reward_score": 30.0,
+      "max_score": 33.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 30.0,
+      "score": 30.0,
+      "percent": 90.9,
+      "dimensions": {
+        "routing": {
+          "reward_score": 8.0,
+          "max_score": 8.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 8.0,
+          "score": 8.0,
+          "percent": 100.0,
+          "criteria_count": 4.0,
+          "matched_count": 3.0
+        },
+        "interaction": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        },
+        "proof": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "scope": {
+          "reward_score": 4.0,
+          "max_score": 7.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 57.1,
+          "criteria_count": 3.0,
+          "matched_count": 2.0
+        },
+        "preferred_choice": {
+          "reward_score": 5.0,
+          "max_score": 5.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 5.0,
+          "score": 5.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        },
+        "risk_routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "blocker_handoff": {
+          "reward_score": 8.0,
+          "max_score": 8.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 8.0,
+          "score": 8.0,
+          "percent": 100.0,
+          "criteria_count": 4.0,
+          "matched_count": 4.0
+        }
+      }
+    },
+    "ship": {
+      "reward_score": 25.0,
+      "max_score": 25.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 25.0,
+      "score": 25.0,
+      "percent": 100.0,
+      "dimensions": {
+        "routing": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 4.0,
+          "matched_count": 4.0
+        },
+        "dependency_planning": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "wave_planning": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 3.0,
+          "matched_count": 3.0
+        },
+        "risk_routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 3.0,
+          "matched_count": 1.0
+        },
+        "reviewability": {
+          "reward_score": 7.0,
+          "max_score": 7.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 7.0,
+          "score": 7.0,
+          "percent": 100.0,
+          "criteria_count": 3.0,
+          "matched_count": 3.0
+        },
+        "preferred_choice": {
+          "reward_score": 6.0,
+          "max_score": 6.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 6.0,
+          "score": 6.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        }
+      }
+    }
+  },
+  "analysis": {
+    "weakest_cases": [
+      {
+        "id": "shape-clear-small-bug",
+        "skill": "shape",
+        "score": 5.0,
+        "max_score": 8.0,
+        "percent": 62.5
+      },
+      {
+        "id": "ppp-proof-trap",
+        "skill": "ppp",
+        "score": 9.0,
+        "max_score": 11.0,
+        "percent": 81.8
+      },
+      {
+        "id": "ppp-cloud-ui-empty-state",
+        "skill": "ppp-cloud",
+        "score": 10.0,
+        "max_score": 10.0,
+        "percent": 100.0
+      },
+      {
+        "id": "ppp-small-bug",
+        "skill": "ppp",
+        "score": 10.0,
+        "max_score": 10.0,
+        "percent": 100.0
+      },
+      {
+        "id": "ppp-cloud-auth-unclear",
+        "skill": "ppp-cloud",
+        "score": 12.0,
+        "max_score": 12.0,
+        "percent": 100.0
+      }
+    ],
+    "weakest_dimensions": [
+      {
+        "dimension": "scope",
+        "score": 9.0,
+        "max_score": 12.0,
+        "percent": 75.0,
+        "penalty_score": 0.0
+      },
+      {
+        "dimension": "pattern_reuse",
+        "score": 2.0,
+        "max_score": 2.0,
+        "percent": 100.0,
+        "penalty_score": 0.0
+      },
+      {
+        "dimension": "diagnosis",
+        "score": 2.0,
+        "max_score": 2.0,
+        "percent": 100.0,
+        "penalty_score": 0.0
+      },
+      {
+        "dimension": "dependency_planning",
+        "score": 2.0,
+        "max_score": 2.0,
+        "percent": 100.0,
+        "penalty_score": 0.0
+      },
+      {
+        "dimension": "inspection",
+        "score": 3.0,
+        "max_score": 3.0,
+        "percent": 100.0,
+        "penalty_score": 0.0
+      }
+    ],
+    "most_missed_criteria": [
+      {
+        "name": "keeps-first-pr-visible",
+        "dimension": "scope",
+        "description": "Still keeps first-PR or focused-scope framing visible.",
+        "count": 1,
+        "points": 3
+      }
+    ],
+    "most_triggered_penalties": [
+      {
+        "name": "no-full-suite-as-main-proof",
+        "dimension": "execution_discipline",
+        "description": "Penalize recommending the full suite as the primary proof.",
+        "count": 1,
+        "points": 2
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "ppp-cloud-auth-unclear",
+      "skill": "ppp-cloud",
+      "description": "PPP Cloud should stop on unresolved auth and public API questions rather than guessing.",
+      "prompt_path": "evals/prompts/ppp-cloud-auth-unclear.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ppp-cloud-auth-unclear.md",
+      "response_sha256": "51ff188e181148ec568e1533355e3536a7bf2e800ec14c8f8657b60b35985f84",
+      "reward_score": 12.0,
+      "max_score": 12.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 12.0,
+      "score": 12.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "stops-for-auth-ambiguity",
+          "dimension": "risk_routing",
+          "description": "Stops or blockers out because auth is unresolved.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "auth",
+            "permissions",
+            "blocker",
+            "stop"
+          ],
+          "none": []
+        },
+        {
+          "name": "stops-for-public-api-ambiguity",
+          "dimension": "risk_routing",
+          "description": "Stops or blockers out because public API scope is unresolved.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "public API",
+            "contract",
+            "blocker",
+            "stop"
+          ],
+          "none": []
+        },
+        {
+          "name": "explains-why-not-safe-autonomously",
+          "dimension": "blocker_handoff",
+          "description": "Explains why the ambiguity prevents safe autonomous delivery.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "cannot safely proceed",
+            "permissions",
+            "auth",
+            "public API"
+          ],
+          "none": []
+        },
+        {
+          "name": "actionable-next-step",
+          "dimension": "blocker_handoff",
+          "description": "Says what decision is needed or what the next safe task is.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "decision needed",
+            "smallest next resumable task",
+            "next safe step",
+            "proof gap"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-blocker-choice",
+          "dimension": "preferred_choice",
+          "description": "Prefers the strongest blocker: explicitly names both the auth and public-API uncertainty and asks for the missing decision.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [
+            "auth|permissions",
+            "public API|contract",
+            "decision needed|next safe step|proof gap"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "no-guessing-through-guardrails",
+          "dimension": "execution_discipline",
+          "description": "Penalize guessing through the auth/API ambiguity as if the task were clear.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "just implement",
+            "clear enough to proceed",
+            "safe to deliver autonomously"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "risk_routing": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "blocker_handoff": {
+          "reward_score": 6.0,
+          "max_score": 6.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 6.0,
+          "score": 6.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "preferred_choice": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        }
+      }
+    },
+    {
+      "id": "ppp-cloud-ui-empty-state",
+      "skill": "ppp-cloud",
+      "description": "PPP Cloud should prefer existing patterns, define proof, and stay bounded to a single safe task.",
+      "prompt_path": "examples/tickets/ui-empty-state.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ppp-cloud-ui-empty-state.md",
+      "response_sha256": "6cafb8cd3c2c275cf849f4a340bcfc266de8910be9283cef7a0dbee0f74066c1",
+      "reward_score": 10.0,
+      "max_score": 10.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 10.0,
+      "score": 10.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "single-bounded-task",
+          "dimension": "scope",
+          "description": "Keeps the work to one focused bounded task.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "one focused",
+            "bounded",
+            "single task",
+            "small"
+          ],
+          "none": []
+        },
+        {
+          "name": "reuse-empty-state-pattern",
+          "dimension": "pattern_reuse",
+          "description": "Prefers the existing empty-state component or pattern.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "existing empty-state component",
+            "existing pattern",
+            "reuse"
+          ],
+          "none": []
+        },
+        {
+          "name": "preserve-loading-and-error-behaviour",
+          "dimension": "scope",
+          "description": "Preserves loading and error behaviour.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "loading and error",
+            "preserve current loading and error"
+          ],
+          "none": []
+        },
+        {
+          "name": "component-proof-path",
+          "dimension": "proof",
+          "description": "Chooses a direct UI proof path.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "component test",
+            "manual verification",
+            "empty state"
+          ],
+          "none": []
+        },
+        {
+          "name": "draft-pr-or-blocker-framing",
+          "dimension": "handoff",
+          "description": "Frames the result as draft PR or blocker rather than open-ended exploration.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "draft PR",
+            "blocker",
+            "handoff"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "scope": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "pattern_reuse": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "proof": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "handoff": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    {
+      "id": "ppp-failing-test",
+      "skill": "ppp",
+      "description": "PPP should preserve the failing test, attempt focused fixes, and stop cleanly if proof still fails.",
+      "prompt_path": "examples/tickets/failing-test.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ppp-failing-test.md",
+      "response_sha256": "fed761f83d32b34b00a00edbb4cc1985b7c2a6b38865e74ef930e8e50e780d53",
+      "reward_score": 14.0,
+      "max_score": 14.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 14.0,
+      "score": 14.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "keep-failure-as-primary-proof",
+          "dimension": "proof",
+          "description": "Keeps the provided failure as the main proof target.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "failing command",
+            "provided failure",
+            "primary proof",
+            "proof target"
+          ],
+          "none": []
+        },
+        {
+          "name": "classify-failure",
+          "dimension": "diagnosis",
+          "description": "Classifies the failure before editing.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "classify",
+            "implementation bug",
+            "test expectation",
+            "environment",
+            "unknown"
+          ],
+          "none": []
+        },
+        {
+          "name": "one-cause-per-attempt",
+          "dimension": "debug_loop",
+          "description": "Describes one focused cause/fix per attempt.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "one confirmed cause",
+            "one focused fix",
+            "focused fix"
+          ],
+          "none": []
+        },
+        {
+          "name": "bounded-attempts",
+          "dimension": "debug_loop",
+          "description": "Keeps the loop bounded to two focused attempts.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "two focused fix attempts",
+            "at most two focused fixes",
+            "maximum automatic fix attempts: 2"
+          ],
+          "none": []
+        },
+        {
+          "name": "blocked-handoff-proof-gap",
+          "dimension": "blocker_handoff",
+          "description": "Blocked handoff includes a proof gap.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "proof gap"
+          ],
+          "none": []
+        },
+        {
+          "name": "blocked-handoff-resumable-next-step",
+          "dimension": "blocker_handoff",
+          "description": "Blocked handoff includes the smallest resumable next task.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "smallest next resumable task",
+            "resumable"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-debugging-handoff-structure",
+          "dimension": "preferred_choice",
+          "description": "Prefers the strongest blocked handoff: what was tried, proof gap, and smallest next resumable task.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [
+            "What I tried|tried",
+            "proof gap",
+            "smallest next resumable task"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "no-test-weakening",
+          "dimension": "execution_discipline",
+          "description": "Penalize weakening, skipping, or deleting the failing test.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "weaken the test",
+            "remove the assertion",
+            "skip the test",
+            "delete the test"
+          ],
+          "none": []
+        },
+        {
+          "name": "no-broad-proof-switch",
+          "dimension": "execution_discipline",
+          "description": "Penalize switching the main proof to broad generic checks.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "full suite.*main proof",
+            "lint.*main proof",
+            "typecheck.*main proof",
+            "all other checks pass"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "proof": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "diagnosis": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "debug_loop": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "blocker_handoff": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "preferred_choice": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 2.0,
+          "matched_count": 0.0
+        }
+      }
+    },
+    {
+      "id": "ppp-proof-trap",
+      "skill": "ppp",
+      "description": "PPP should choose the smallest behaviourally meaningful proof instead of defaulting to lint, typecheck, or a broad full-suite run.",
+      "prompt_path": "evals/prompts/ppp-proof-trap.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ppp-proof-trap.md",
+      "response_sha256": "d81064b67bbb0d647c8328610774eb275175e470cccd06c4f37dd36c19180cc9",
+      "reward_score": 11.0,
+      "max_score": 11.0,
+      "penalty_score": -2.0,
+      "raw_net_score": 9.0,
+      "score": 9.0,
+      "percent": 81.8,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "make-proof-visible",
+          "dimension": "proof",
+          "description": "Makes proof visible explicitly.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "proof",
+            "prove"
+          ],
+          "none": []
+        },
+        {
+          "name": "billing-behaviour-anchor",
+          "dimension": "proof",
+          "description": "Anchors proof to the billing-summary behaviour.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "billing summary",
+            "refunded invoices",
+            "counted twice",
+            "behaviour"
+          ],
+          "none": []
+        },
+        {
+          "name": "targeted-test-choice",
+          "dimension": "proof",
+          "description": "Chooses a targeted affected-area test as the main proof.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "targeted test",
+            "affected test",
+            "narrowest meaningful proof"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-main-proof-choice",
+          "dimension": "preferred_choice",
+          "description": "Prefers the best proof: a narrow test directly tied to the refunded-invoice billing behaviour.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [
+            "billing summary|refunded invoices|counted twice",
+            "targeted test|affected test|narrowest meaningful proof"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "follow-existing-pattern",
+          "dimension": "inspection",
+          "description": "Keeps the existing billing calculation pattern in view.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "existing billing calculation pattern",
+            "follow existing",
+            "existing pattern"
+          ],
+          "none": []
+        },
+        {
+          "name": "small-safe-change",
+          "dimension": "scope",
+          "description": "Keeps the change small and local.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "smallest safe",
+            "small safe",
+            "do not redesign"
+          ],
+          "none": []
+        },
+        {
+          "name": "no-lint-typecheck-as-main-proof",
+          "dimension": "execution_discipline",
+          "description": "Penalize choosing lint or typecheck as the main proof.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "lint is the main proof",
+            "typecheck is the main proof"
+          ],
+          "none": []
+        },
+        {
+          "name": "no-full-suite-as-main-proof",
+          "dimension": "execution_discipline",
+          "description": "Penalize recommending the full suite as the primary proof.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": -2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "full suite only",
+            "run everything first",
+            "npm test.*main proof"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "proof": {
+          "reward_score": 6.0,
+          "max_score": 6.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 6.0,
+          "score": 6.0,
+          "percent": 100.0,
+          "criteria_count": 3.0,
+          "matched_count": 3.0
+        },
+        "preferred_choice": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "inspection": {
+          "reward_score": 1.0,
+          "max_score": 1.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 1.0,
+          "score": 1.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "scope": {
+          "reward_score": 1.0,
+          "max_score": 1.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 1.0,
+          "score": 1.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": -2.0,
+          "raw_net_score": -2.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 2.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    {
+      "id": "ppp-small-bug",
+      "skill": "ppp",
+      "description": "PPP should inspect before patching and define direct proof for a small validation bug.",
+      "prompt_path": "examples/tickets/small-bug-fix.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ppp-small-bug.md",
+      "response_sha256": "43cd808728d80de4ffbc29d5211631793426f71186b57367cfc6fb83f5b322e0",
+      "reward_score": 10.0,
+      "max_score": 10.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 10.0,
+      "score": 10.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "inspect-relevant-validation-area",
+          "dimension": "inspection",
+          "description": "Inspects or reviews the relevant validation area before editing.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "inspect",
+            "review relevant code",
+            "read the relevant code",
+            "validation"
+          ],
+          "none": []
+        },
+        {
+          "name": "state-proof-before-patch",
+          "dimension": "proof",
+          "description": "Makes proof visible before patching.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "proof",
+            "prove"
+          ],
+          "none": []
+        },
+        {
+          "name": "tie-proof-to-behaviour",
+          "dimension": "proof",
+          "description": "Proof is tied to the validation behaviour rather than generic checks.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "whitespace",
+            "validation",
+            "reject",
+            "behaviour"
+          ],
+          "none": []
+        },
+        {
+          "name": "prefer-targeted-test",
+          "dimension": "proof",
+          "description": "Prefers a targeted affected-area test.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "targeted test",
+            "affected validation test",
+            "existing validation pattern"
+          ],
+          "none": []
+        },
+        {
+          "name": "small-safe-scope",
+          "dimension": "scope",
+          "description": "Frames the work as a small safe change.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "smallest safe",
+            "small safe",
+            "focused PR"
+          ],
+          "none": []
+        },
+        {
+          "name": "pr-review-handoff",
+          "dimension": "handoff",
+          "description": "Keeps review or PR handoff visible.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "review",
+            "PR",
+            "handoff"
+          ],
+          "none": []
+        },
+        {
+          "name": "no-broad-proof-substitute",
+          "dimension": "execution_discipline",
+          "description": "Penalize using broad generic checks as the main proof.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "full suite only",
+            "run everything first",
+            "lint.*main proof",
+            "typecheck.*main proof"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "inspection": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "proof": {
+          "reward_score": 5.0,
+          "max_score": 5.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 5.0,
+          "score": 5.0,
+          "percent": 100.0,
+          "criteria_count": 3.0,
+          "matched_count": 3.0
+        },
+        "scope": {
+          "reward_score": 1.0,
+          "max_score": 1.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 1.0,
+          "score": 1.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "handoff": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        }
+      }
+    },
+    {
+      "id": "shape-clear-small-bug",
+      "skill": "shape",
+      "description": "Shape should avoid over-shaping a clear small bug and route it directly to focused execution.",
+      "prompt_path": "examples/tickets/small-bug-fix.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/shape-clear-small-bug.md",
+      "response_sha256": "df61b72b2beac9baaa88897dbe0e3590c8f4884c252b9e93e5c3f100d93bbfa5",
+      "reward_score": 5.0,
+      "max_score": 8.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 5.0,
+      "score": 5.0,
+      "percent": 62.5,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "route-to-focused-execution",
+          "dimension": "routing",
+          "description": "Routes a clear small bug to PPP or PPP Cloud rather than Ship.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "ready-for-ppp",
+            "ready-for-ppp-cloud",
+            "/ppp",
+            "/ppp-cloud"
+          ],
+          "none": []
+        },
+        {
+          "name": "avoid-ship-on-clear-bug",
+          "dimension": "routing",
+          "description": "Penalize routing a clear small bug to Ship.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "ready-for-ship",
+            "/ship"
+          ],
+          "none": []
+        },
+        {
+          "name": "no-unnecessary-human-block",
+          "dimension": "interaction",
+          "description": "Penalize manufacturing a human-decision blocker for a normal small bug fix.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "needs-human-decision",
+            "Stopped"
+          ],
+          "none": []
+        },
+        {
+          "name": "keeps-proof-visible",
+          "dimension": "proof",
+          "description": "Still preserves proof.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "Proof",
+            "proof"
+          ],
+          "none": []
+        },
+        {
+          "name": "keeps-first-pr-visible",
+          "dimension": "scope",
+          "description": "Still keeps first-PR or focused-scope framing visible.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "First PR",
+            "focused task",
+            "smallest safe"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "routing": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 1.0
+        },
+        "interaction": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        },
+        "proof": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "scope": {
+          "reward_score": 0.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        }
+      }
+    },
+    {
+      "id": "shape-large-feature",
+      "skill": "shape",
+      "description": "Shape should refuse to send a broad dashboard request straight to PPP and instead identify a safe first PR.",
+      "prompt_path": "examples/tickets/large-feature-too-big.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/shape-large-feature.md",
+      "response_sha256": "d222a6f6815802273ae5c3f81ae047a55b89d5a44ccd5bc2742c368e13008dc0",
+      "reward_score": 13.0,
+      "max_score": 13.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 13.0,
+      "score": 13.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "not-direct-ppp",
+          "dimension": "routing",
+          "description": "Does not recommend implementing the full dashboard directly with PPP.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [],
+          "none": [
+            "ready-for-ppp.*analytics dashboard",
+            "implement this directly with /ppp"
+          ]
+        },
+        {
+          "name": "route-to-ship-or-decision",
+          "dimension": "routing",
+          "description": "Routes broad work to Ship or holds for a human decision.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "ready-for-ship",
+            "needs-human-decision",
+            "/ship"
+          ],
+          "none": []
+        },
+        {
+          "name": "specific-acceptance-criteria",
+          "dimension": "scope",
+          "description": "Produces acceptance criteria or equivalent scoped requirements.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "Acceptance criteria",
+            "AC1"
+          ],
+          "none": []
+        },
+        {
+          "name": "proof-ideas-visible",
+          "dimension": "proof",
+          "description": "Keeps proof ideas visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "Proof",
+            "proof"
+          ],
+          "none": []
+        },
+        {
+          "name": "small-safe-first-slice",
+          "dimension": "scope",
+          "description": "Identifies a concrete safe first slice.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "dashboard shell",
+            "read-only table",
+            "feature flag",
+            "proof plan"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-first-slice-and-route",
+          "dimension": "preferred_choice",
+          "description": "Prefers the best outcome: a concrete first slice plus Ship routing for the broader delivery.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [
+            "ready-for-ship|/ship",
+            "dashboard shell|read-only table|feature flag|proof plan"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "avoids-coding-jump",
+          "dimension": "execution_discipline",
+          "description": "Penalize jumping straight from broad ask to implementation.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "start implementing now",
+            "build the dashboard directly",
+            "go straight to code"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "routing": {
+          "reward_score": 5.0,
+          "max_score": 5.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 5.0,
+          "score": 5.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "scope": {
+          "reward_score": 4.0,
+          "max_score": 4.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 4.0,
+          "score": 4.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "proof": {
+          "reward_score": 1.0,
+          "max_score": 1.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 1.0,
+          "score": 1.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "preferred_choice": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "execution_discipline": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        }
+      }
+    },
+    {
+      "id": "shape-public-api-ambiguity",
+      "skill": "shape",
+      "description": "Shape should stop for unresolved public API and permission decisions while preserving safe shaped work and the next resumable task.",
+      "prompt_path": "evals/prompts/shape-public-api-ambiguity.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/shape-public-api-ambiguity.md",
+      "response_sha256": "059f2e2a16a744051dd5d52ad638d9b4ad92892ab0456336edd87a5a2b748ae1",
+      "reward_score": 12.0,
+      "max_score": 12.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 12.0,
+      "score": 12.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "stop-for-human-decision",
+          "dimension": "risk_routing",
+          "description": "Stops for a human decision instead of pretending behaviour is defined.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "needs-human-decision",
+            "human decision",
+            "Stopped"
+          ],
+          "none": []
+        },
+        {
+          "name": "why-blocks-safe-shaping",
+          "dimension": "blocker_handoff",
+          "description": "Explains why the missing decision blocks safe shaping.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "Why this blocks safe shaping",
+            "blocks safe shaping",
+            "public API",
+            "permissions"
+          ],
+          "none": []
+        },
+        {
+          "name": "preserve-safe-shaped-work",
+          "dimension": "blocker_handoff",
+          "description": "Preserves what is already safe and shaped.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "What is already safe and shaped",
+            "Safe to proceed now"
+          ],
+          "none": []
+        },
+        {
+          "name": "say-what-remains-unshaped",
+          "dimension": "blocker_handoff",
+          "description": "Makes the intentionally unshaped remainder visible.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "What remains intentionally unshaped",
+            "Remaining ambiguity"
+          ],
+          "none": []
+        },
+        {
+          "name": "smallest-next-shaped-task",
+          "dimension": "blocker_handoff",
+          "description": "Identifies the smallest next shaped task after the answer.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "Smallest next shaped task after answer",
+            "smallest next shaped task"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-blocker-shape-structure",
+          "dimension": "preferred_choice",
+          "description": "Prefers the strongest shape blocker structure: safe shaped work, next shaped task, and route after answer.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [
+            "What is already safe and shaped|Safe to proceed now",
+            "Smallest next shaped task after answer|smallest next shaped task",
+            "Safest next route after answer|continue shaping|/ppp|/ppp-cloud|/ship"
+          ],
+          "any": [],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "risk_routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "blocker_handoff": {
+          "reward_score": 8.0,
+          "max_score": 8.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 8.0,
+          "score": 8.0,
+          "percent": 100.0,
+          "criteria_count": 4.0,
+          "matched_count": 4.0
+        },
+        "preferred_choice": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    {
+      "id": "ship-foundation-first",
+      "skill": "ship",
+      "description": "Ship should detect foundation-first work, avoid unsafe parallelism on moving contracts, and reason about review burden.",
+      "prompt_path": "evals/prompts/ship-foundation-first.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ship-foundation-first.md",
+      "response_sha256": "6a1001abc64c5e8060f17a957b7ab4bc638c2f3366a4ce5c5972e70340b0bfd0",
+      "reward_score": 13.0,
+      "max_score": 13.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 13.0,
+      "score": 13.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "route-visible",
+          "dimension": "routing",
+          "description": "Makes the route visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "route"
+          ],
+          "none": []
+        },
+        {
+          "name": "confidence-visible",
+          "dimension": "routing",
+          "description": "Makes confidence visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "confidence"
+          ],
+          "none": []
+        },
+        {
+          "name": "foundation-detected",
+          "dimension": "dependency_planning",
+          "description": "Identifies a foundation step around contracts, schema, or validation.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "foundation",
+            "schema",
+            "validation base",
+            "shared contract"
+          ],
+          "none": []
+        },
+        {
+          "name": "wave-one-visible",
+          "dimension": "wave_planning",
+          "description": "Makes wave 1 visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [
+            "wave 1"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "wave-two-visible",
+          "dimension": "wave_planning",
+          "description": "Makes wave 2 visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [
+            "wave 2"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "sequence-over-unsafe-parallelism",
+          "dimension": "risk_routing",
+          "description": "Shows sequencing or avoids unsafe parallelism while contracts are unstable.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "do not parallelize",
+            "unstable",
+            "sequence"
+          ],
+          "none": []
+        },
+        {
+          "name": "review-burden-explicit",
+          "dimension": "reviewability",
+          "description": "Reasons explicitly about review burden.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "review burden",
+            "reviewable",
+            "merge order"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-foundation-then-follow-on-waves",
+          "dimension": "preferred_choice",
+          "description": "Prefers the best two-wave plan: wave 1 stabilizes contract/schema/validation, wave 2 handles follow-on UI/API/docs/tests.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [
+            "(?s)wave 1.*(contract|schema|validation)",
+            "(?s)wave 2.*(ui|results table|csv|docs|tests|export)"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "no-everything-parallel",
+          "dimension": "risk_routing",
+          "description": "Penalize claiming everything can run in parallel immediately.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "all tasks can run in parallel immediately",
+            "everything is independent"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "dependency_planning": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "wave_planning": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "risk_routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 1.0
+        },
+        "reviewability": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "preferred_choice": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        }
+      }
+    },
+    {
+      "id": "ship-review-burden",
+      "skill": "ship",
+      "description": "Ship should factor review burden into routing even when file overlap alone might look manageable.",
+      "prompt_path": "evals/prompts/ship-review-burden.md",
+      "response_path": "evals/runs/2026-05-26-gpt-5-4/responses/ship-review-burden.md",
+      "response_sha256": "15c5749af5b0b31973cb762b3658cff0b4baa5fac72b93997420638a7995f22f",
+      "reward_score": 12.0,
+      "max_score": 12.0,
+      "penalty_score": 0.0,
+      "raw_net_score": 12.0,
+      "score": 12.0,
+      "percent": 100.0,
+      "missing_response": false,
+      "placeholder_response": false,
+      "criteria": [
+        {
+          "name": "route-visible",
+          "dimension": "routing",
+          "description": "Makes the route visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [
+            "Route"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "confidence-visible",
+          "dimension": "routing",
+          "description": "Makes confidence visible.",
+          "kind": "reward",
+          "points": 1,
+          "earned": 1.0,
+          "matched": true,
+          "all": [
+            "Confidence"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "mentions-review-burden",
+          "dimension": "reviewability",
+          "description": "Explicitly reasons about review burden.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "review burden",
+            "reviewable",
+            "same user-visible behaviour",
+            "merge order"
+          ],
+          "none": []
+        },
+        {
+          "name": "recognizes-shared-behaviour",
+          "dimension": "reviewability",
+          "description": "Recognizes the same user-visible behaviour spans the work.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "same user-visible behaviour",
+            "shared contract",
+            "reviewers",
+            "mapping"
+          ],
+          "none": []
+        },
+        {
+          "name": "avoid-fragmented-parallelism",
+          "dimension": "wave_planning",
+          "description": "Avoids over-fragmenting the work into many PRs.",
+          "kind": "reward",
+          "points": 2,
+          "earned": 2.0,
+          "matched": true,
+          "all": [],
+          "any": [
+            "sequence",
+            "single PR",
+            "smaller wave",
+            "reduce the parallel wave"
+          ],
+          "none": []
+        },
+        {
+          "name": "preferred-review-burden-route",
+          "dimension": "preferred_choice",
+          "description": "Prefers the best route: explicitly connect shared user-visible behaviour to a smaller wave or sequenced plan.",
+          "kind": "reward",
+          "points": 3,
+          "earned": 3.0,
+          "matched": true,
+          "all": [
+            "same user-visible behaviour|mapping",
+            "single PR|smaller wave|reduce the parallel wave|sequence"
+          ],
+          "any": [],
+          "none": []
+        },
+        {
+          "name": "no-everything-parallel",
+          "dimension": "risk_routing",
+          "description": "Penalize claiming everything can run in parallel immediately.",
+          "kind": "penalty",
+          "points": 2,
+          "earned": 0.0,
+          "matched": false,
+          "all": [],
+          "any": [
+            "all tasks can run in parallel immediately",
+            "everything is independent"
+          ],
+          "none": []
+        }
+      ],
+      "dimensions": {
+        "routing": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "reviewability": {
+          "reward_score": 5.0,
+          "max_score": 5.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 5.0,
+          "score": 5.0,
+          "percent": 100.0,
+          "criteria_count": 2.0,
+          "matched_count": 2.0
+        },
+        "wave_planning": {
+          "reward_score": 2.0,
+          "max_score": 2.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 2.0,
+          "score": 2.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "preferred_choice": {
+          "reward_score": 3.0,
+          "max_score": 3.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 3.0,
+          "score": 3.0,
+          "percent": 100.0,
+          "criteria_count": 1.0,
+          "matched_count": 1.0
+        },
+        "risk_routing": {
+          "reward_score": 0.0,
+          "max_score": 0.0,
+          "penalty_score": 0.0,
+          "raw_net_score": 0.0,
+          "score": 0.0,
+          "percent": 0.0,
+          "criteria_count": 1.0,
+          "matched_count": 0.0
+        }
+      }
+    }
+  ]
+}

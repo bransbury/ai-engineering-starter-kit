@@ -1,6 +1,6 @@
 ---
 name: ship
-version: 0.7.0
+version: 0.8.0
 description: "Choose and coordinate the safest delivery path for AI-assisted engineering work: shape if needed, run PPP, use PPP Cloud, or coordinate parallel worktree tasks."
 ---
 
@@ -59,6 +59,7 @@ Be concise.
 - Keep task contracts compact.
 - Do not duplicate PPP or PPP Cloud instructions; reference them.
 - Create coordination artifacts only for multi-PR or parallel work.
+- Default to minimal useful output. Keep the visible routing explanation compact, but preserve important assumptions, confidence, proof expectations, blockers, and execution-wave reasoning when they affect user steering.
 
 ## Capability and permission handling
 
@@ -97,6 +98,7 @@ Do not repeatedly ask the user to choose execution modes. Ask only for missing p
 - Do not make critical product/security/data/API decisions.
 - Do not parallelize tasks with unresolved dependencies.
 - Do not parallelize tasks with likely shared-file conflicts.
+- Do not parallelize tasks that depend on an unmerged shared contract, schema, validation base, or public interface that is still changing.
 - Do not create worktrees from an unknown or dirty base without handling it.
 - Do not stage or commit unrelated user changes.
 - Do not launch more parallel tasks than humans can review.
@@ -125,6 +127,9 @@ Determine:
 - Does it require a human decision?
 - Does it involve guardrailed areas?
 - Are there independent parallelizable tasks?
+- Is there foundation-first work that should stabilize contracts, schemas, validation, or shared interfaces before other tasks begin?
+- Do candidate tasks share an unstable contract, schema, validation base, or public interface?
+- What review burden would the resulting PR set create?
 - What is the shortest safe dependency-aware execution plan?
 
 Guardrailed areas:
@@ -184,6 +189,8 @@ Use inspected code where possible. If a score is inferred from task text only, m
 | Risk safety | No unresolved product/security/data/API guardrail decision |
 | Independence | Does not depend on unmerged work |
 | Conflict safety | Low expected file overlap/shared-file risk |
+| Contract stability | Shared schemas/contracts/validation bases are already stable or can be stabilized first |
+| Review burden | Humans can review the resulting PR set without confusion or overload |
 
 Confidence:
 
@@ -225,9 +232,11 @@ Route to parallel worktree coordination when:
 - shaped work contains 2+ parallel candidates
 - each candidate has independence >= 4
 - each candidate has conflict safety >= 4
+- each candidate has contract stability >= 4, or a clear foundation wave can raise it before parallel work begins
 - each candidate has verifiability >= 4
 - each candidate has Medium or High confidence
 - no shared coordination-file conflict exists
+- review burden >= 3
 - review capacity can handle the PR count
 
 Stop for human decision when:
@@ -239,9 +248,17 @@ Stop for human decision when:
 - public API contract is unclear
 - architecture direction is unclear
 
-Every Ship output must include the routing scorecard, selected route, and confidence.
+Every Ship output must include the selected route and confidence.
 
-Every multi-task Ship output must also include the recommended execution waves.
+Include the full routing scorecard only when:
+
+- the route is non-obvious
+- confidence is Low
+- multiple routes are plausibly safe
+- the work is multi-task, parallel, or blocked
+- the user asks for the reasoning
+
+Every multi-task Ship output must include the recommended execution waves.
 
 ## 3. Route
 
@@ -359,9 +376,12 @@ Checks:
 - [ ] Each task has clear scope
 - [ ] Each task has explicit non-goals
 - [ ] Each task has proof
+- [ ] Foundation-first tasks are identified
 - [ ] Dependencies are resolved
 - [ ] File overlap is low
+- [ ] Shared contracts/schemas/validation bases are already stable or have a foundation owner
 - [ ] Coordination files have one owner
+- [ ] Review burden is acceptable for the proposed wave size
 - [ ] Max parallel task limit respected
 - [ ] Branch names are deterministic
 - [ ] Worktree paths are isolated
@@ -423,6 +443,17 @@ Classify tasks as:
 - dependent
 - integration/hardening
 
+Treat a task as foundation when it establishes or changes something other tasks rely on, such as:
+
+- schemas or shared data contracts
+- validation rules or validation entry points
+- public API request/response shapes
+- shared interfaces, types, or adapters
+- build/module enablement
+- base test helpers or harnesses needed by later tasks
+
+Treat a shared contract as unstable when multiple tasks would rely on it before it has been established and validated in one merged or clearly sequenced task.
+
 Rules:
 
 - foundation runs first
@@ -430,17 +461,40 @@ Rules:
 - independent tasks may run in parallel after dependencies are satisfied
 - integration/hardening runs last
 - tasks touching the same files should usually be sequenced
+- tasks sharing an unstable contract, schema, validation base, or public interface must be sequenced behind a foundation task
 - coordination files may have only one owner
 - unexpected need to edit a forbidden/shared file requires stop and report
+- if review burden becomes too high, reduce parallel wave size even when file overlap is low
+
+Before recommending parallel execution, explicitly check for:
+
+- one task changing a schema while another consumes it
+- one task changing validation while another assumes the new validation exists
+- one task introducing a shared interface while another implements against it
+- one task changing a shared test harness while another depends on it
+- multiple PRs that would force reviewers to reason about the same user-visible behaviour together
+
+If any of those are true, recommend a foundation-first plan.
 
 Build an execution-wave plan:
 
-- wave 1 contains the smallest required foundation work
+- wave 1 contains the smallest required foundation work that stabilizes shared contracts and validation bases
+- prefer a two-wave plan when possible:
+  - wave 1 establishes the contract, schema, validation base, shared interface, or test harness
+  - wave 2 runs UI, API, docs, tests, or follow-on tasks in parallel where safe
 - each later wave contains every safe task whose dependencies are already satisfied
 - prefer broader safe waves over unnecessary serial execution
 - do not delay an independent task to preserve task-number order
 - if two plans are equally safe and reviewable, recommend the one with fewer waves
 - if a parallel wave would create review overload, reduce the wave size but still prefer the most efficient safe grouping
+
+Review burden should consider:
+
+- how many PRs a human must review in one wave
+- whether multiple PRs affect the same user-visible behaviour
+- whether reviewers would need to understand a shared contract across several PRs at once
+- whether merge order is obvious and low-risk
+- whether one slightly slower plan would produce much clearer reviews
 
 Use this format:
 
@@ -453,13 +507,17 @@ Use this format:
 
 Why this is the recommended plan:
 - ...
+- Foundation-first rationale, if any:
+  - ...
+- Review-burden rationale:
+  - ...
 ```
 
 Create a touch map:
 
 ```md
-| Task | Expected files/modules | Shared with other task? | Conflict risk | Decision |
-|---|---|---|---|---|
+| Task | Expected files/modules | Shared contract/interface? | Conflict risk | Review burden | Decision |
+|---|---|---|---|---|---|
 ```
 
 ## 7. Worktree task contract
@@ -703,6 +761,9 @@ Execution mode:
 Recommended execution waves:
 - ...
 
+Foundation-first tasks:
+- ...
+
 | Task | Branch | Worktree | Mode | Commit | PR | Status | Merge order | Review focus |
 |---|---|---|---|---|---|---|---|---|
 
@@ -714,6 +775,9 @@ Routing scorecard:
 - ...
 
 Confidence:
+- ...
+
+Review burden:
 - ...
 
 Risks:

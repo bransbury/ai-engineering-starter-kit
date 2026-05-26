@@ -1,0 +1,110 @@
+{
+  "id": "ppp-proof-trap",
+  "skill": "ppp",
+  "description": "PPP should choose the smallest behaviourally meaningful proof instead of defaulting to lint, typecheck, or a broad full-suite run.",
+  "prompt_path": "evals/prompts/ppp-proof-trap.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Treats the smallest command overall or the broadest validation bundle as automatically best.",
+      "Mentions proof generically without tying it to the refunded-invoice billing behavior."
+    ],
+    "good": [
+      "Chooses a targeted proof that directly exercises the changed billing behavior.",
+      "Makes it clear that lint, typecheck, or a full-suite run are supporting checks at most, not the main proof."
+    ],
+    "excellent": [
+      "Names the exact behavior to prove and chooses the narrowest meaningful test that would fail on regression.",
+      "Shows explicit reasoning about why a broad bundle would be weaker than a direct behavior check for this case."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "make-proof-visible",
+      "dimension": "proof",
+      "points": 1,
+      "description": "Makes proof visible explicitly.",
+      "any": [
+        "proof",
+        "prove"
+      ]
+    },
+    {
+      "name": "billing-behaviour-anchor",
+      "dimension": "proof",
+      "points": 2,
+      "description": "Anchors proof to the billing-summary behaviour.",
+      "any": [
+        "billing summary",
+        "refunded invoices",
+        "counted twice",
+        "behaviour"
+      ]
+    },
+    {
+      "name": "targeted-test-choice",
+      "dimension": "proof",
+      "points": 3,
+      "description": "Chooses a targeted affected-area test as the main proof.",
+      "any": [
+        "targeted test",
+        "affected test",
+        "narrowest meaningful proof"
+      ]
+    },
+    {
+      "name": "preferred-main-proof-choice",
+      "dimension": "preferred_choice",
+      "points": 3,
+      "description": "Prefers the best proof: a narrow test directly tied to the refunded-invoice billing behaviour.",
+      "all": [
+        "billing summary|refunded invoices|counted twice",
+        "targeted test|affected test|narrowest meaningful proof"
+      ]
+    },
+    {
+      "name": "follow-existing-pattern",
+      "dimension": "inspection",
+      "points": 1,
+      "description": "Keeps the existing billing calculation pattern in view.",
+      "any": [
+        "existing billing calculation pattern",
+        "follow existing",
+        "existing pattern"
+      ]
+    },
+    {
+      "name": "small-safe-change",
+      "dimension": "scope",
+      "points": 1,
+      "description": "Keeps the change small and local.",
+      "any": [
+        "smallest safe",
+        "small safe",
+        "do not redesign"
+      ]
+    },
+    {
+      "name": "no-lint-typecheck-as-main-proof",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize choosing lint or typecheck as the main proof.",
+      "any": [
+        "lint is the main proof",
+        "typecheck is the main proof"
+      ]
+    },
+    {
+      "name": "no-full-suite-as-main-proof",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize recommending the full suite as the primary proof.",
+      "any": [
+        "full suite only",
+        "run everything first",
+        "npm test.*main proof"
+      ]
+    }
+  ]
+}

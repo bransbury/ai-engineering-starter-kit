@@ -1,0 +1,77 @@
+{
+  "id": "shape-clear-small-bug",
+  "skill": "shape",
+  "description": "Shape should avoid over-shaping a clear small bug and route it directly to focused execution.",
+  "prompt_path": "examples/tickets/small-bug-fix.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Over-shapes a clear small bug into a large planning artifact or routes it to Ship unnecessarily.",
+      "Introduces human blockers or extra decisions that do not materially affect safe execution."
+    ],
+    "good": [
+      "Recognizes the bug is already PPP-ready and routes it to focused execution with proof still visible.",
+      "Preserves a clear first-PR boundary without unnecessary ceremony."
+    ],
+    "excellent": [
+      "Makes the route decisively obvious, keeps proof visible, and avoids all unnecessary shaping friction.",
+      "Shows that it can distinguish between work that needs shaping and work that only needs disciplined execution."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "route-to-focused-execution",
+      "dimension": "routing",
+      "points": 3,
+      "description": "Routes a clear small bug to PPP or PPP Cloud rather than Ship.",
+      "any": [
+        "ready-for-ppp",
+        "ready-for-ppp-cloud",
+        "/ppp",
+        "/ppp-cloud"
+      ]
+    },
+    {
+      "name": "avoid-ship-on-clear-bug",
+      "dimension": "routing",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize routing a clear small bug to Ship.",
+      "any": [
+        "ready-for-ship",
+        "/ship"
+      ]
+    },
+    {
+      "name": "no-unnecessary-human-block",
+      "dimension": "interaction",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize manufacturing a human-decision blocker for a normal small bug fix.",
+      "any": [
+        "needs-human-decision",
+        "Stopped"
+      ]
+    },
+    {
+      "name": "keeps-proof-visible",
+      "dimension": "proof",
+      "points": 2,
+      "description": "Still preserves proof.",
+      "any": [
+        "Proof",
+        "proof"
+      ]
+    },
+    {
+      "name": "keeps-first-pr-visible",
+      "dimension": "scope",
+      "points": 3,
+      "description": "Still keeps first-PR or focused-scope framing visible.",
+      "any": [
+        "First PR",
+        "focused task",
+        "smallest safe"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "ppp-cloud-ui-empty-state",
+  "skill": "ppp-cloud",
+  "description": "PPP Cloud should prefer existing patterns, define proof, and stay bounded to a single safe task.",
+  "prompt_path": "examples/tickets/ui-empty-state.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Widens the task into redesign or exploratory work instead of one bounded implementation slice.",
+      "Uses broad generic checks as proof without tying them to the empty-state behavior."
+    ],
+    "good": [
+      "Keeps the task bounded, reuses an existing empty-state pattern, and names a direct UI proof path.",
+      "Frames the output as a draft-PR-sized task or a blocker rather than open-ended exploration."
+    ],
+    "excellent": [
+      "Reuses the exact closest existing pattern, preserves loading and error behavior explicitly, and chooses the sharpest component or workflow proof.",
+      "Shows it understands what can safely be changed now versus what should stay untouched in an autonomous run."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "single-bounded-task",
+      "dimension": "scope",
+      "points": 2,
+      "description": "Keeps the work to one focused bounded task.",
+      "any": [
+        "one focused",
+        "bounded",
+        "single task",
+        "small"
+      ]
+    },
+    {
+      "name": "reuse-empty-state-pattern",
+      "dimension": "pattern_reuse",
+      "points": 2,
+      "description": "Prefers the existing empty-state component or pattern.",
+      "any": [
+        "existing empty-state component",
+        "existing pattern",
+        "reuse"
+      ]
+    },
+    {
+      "name": "preserve-loading-and-error-behaviour",
+      "dimension": "scope",
+      "points": 1,
+      "description": "Preserves loading and error behaviour.",
+      "any": [
+        "loading and error",
+        "preserve current loading and error"
+      ]
+    },
+    {
+      "name": "component-proof-path",
+      "dimension": "proof",
+      "points": 3,
+      "description": "Chooses a direct UI proof path.",
+      "any": [
+        "component test",
+        "manual verification",
+        "empty state"
+      ]
+    },
+    {
+      "name": "draft-pr-or-blocker-framing",
+      "dimension": "handoff",
+      "points": 2,
+      "description": "Frames the result as draft PR or blocker rather than open-ended exploration.",
+      "any": [
+        "draft PR",
+        "blocker",
+        "handoff"
+      ]
+    }
+  ]
+}

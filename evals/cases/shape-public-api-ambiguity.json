@@ -1,0 +1,86 @@
+{
+  "id": "shape-public-api-ambiguity",
+  "skill": "shape",
+  "description": "Shape should stop for unresolved public API and permission decisions while preserving safe shaped work and the next resumable task.",
+  "prompt_path": "evals/prompts/shape-public-api-ambiguity.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Pretends the public API or permission behavior is defined and keeps shaping as if the task were clear.",
+      "Stops vaguely without preserving what is already safe to shape."
+    ],
+    "good": [
+      "Stops on the right ambiguity, explains why it blocks safe shaping, and preserves safe shaped work plus the next task after the answer.",
+      "Keeps the human decision narrow and actionable rather than broadening the uncertainty."
+    ],
+    "excellent": [
+      "Draws a crisp line between what is already safely shaped and what must remain intentionally unshaped until the decision lands.",
+      "Leaves the smallest next shaped task and the safest next route in a way that minimizes rediscovery work."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "stop-for-human-decision",
+      "dimension": "risk_routing",
+      "points": 2,
+      "description": "Stops for a human decision instead of pretending behaviour is defined.",
+      "any": [
+        "needs-human-decision",
+        "human decision",
+        "Stopped"
+      ]
+    },
+    {
+      "name": "why-blocks-safe-shaping",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Explains why the missing decision blocks safe shaping.",
+      "any": [
+        "Why this blocks safe shaping",
+        "blocks safe shaping",
+        "public API",
+        "permissions"
+      ]
+    },
+    {
+      "name": "preserve-safe-shaped-work",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Preserves what is already safe and shaped.",
+      "any": [
+        "What is already safe and shaped",
+        "Safe to proceed now"
+      ]
+    },
+    {
+      "name": "say-what-remains-unshaped",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Makes the intentionally unshaped remainder visible.",
+      "any": [
+        "What remains intentionally unshaped",
+        "Remaining ambiguity"
+      ]
+    },
+    {
+      "name": "smallest-next-shaped-task",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Identifies the smallest next shaped task after the answer.",
+      "any": [
+        "Smallest next shaped task after answer",
+        "smallest next shaped task"
+      ]
+    },
+    {
+      "name": "preferred-blocker-shape-structure",
+      "dimension": "preferred_choice",
+      "points": 2,
+      "description": "Prefers the strongest shape blocker structure: safe shaped work, next shaped task, and route after answer.",
+      "all": [
+        "What is already safe and shaped|Safe to proceed now",
+        "Smallest next shaped task after answer|smallest next shaped task",
+        "Safest next route after answer|continue shaping|/ppp|/ppp-cloud|/ship"
+      ]
+    }
+  ]
+}

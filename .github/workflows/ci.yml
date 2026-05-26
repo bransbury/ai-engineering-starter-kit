@@ -25,6 +25,40 @@ jobs:
       - name: Validate skill frontmatter and fences
         run: python3 scripts/validate_skills.py
 
+  validate-evals:
+    name: Validate eval cases
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate skill eval cases
+        run: python3 scripts/eval_skills.py --validate-only
+      - name: Compile eval harness scripts
+        run: python3 -m py_compile scripts/eval_skills.py scripts/init_skill_eval_run.py scripts/render_skill_eval_scoreboard.py scripts/render_skill_manual_review_sheet.py
+      - name: Smoke test eval workflow
+        run: |
+          tmpdir="$(mktemp -d)"
+          python3 scripts/init_skill_eval_run.py \
+            --run-id ci-smoke \
+            --provider openai \
+            --model gpt-5 \
+            --agent codex \
+            --runs-dir "$tmpdir"
+          python3 scripts/eval_skills.py --run-dir "$tmpdir/ci-smoke"
+          python3 scripts/render_skill_manual_review_sheet.py --run-dir "$tmpdir/ci-smoke"
+          python3 scripts/render_skill_eval_scoreboard.py --runs-dir "$tmpdir" --write-markdown "$tmpdir/scoreboard.md"
+      - name: Ensure scoreboard is up to date
+        run: |
+          python3 scripts/render_skill_eval_scoreboard.py
+          git diff --exit-code evals/scoreboard.md
+      - name: Ensure committed manual review sheets are up to date
+        run: |
+          for run_dir in evals/runs/*; do
+            if [ -d "$run_dir" ] && [ -f "$run_dir/manifest.json" ] && [ -f "$run_dir/manual-review.md" ]; then
+              python3 scripts/render_skill_manual_review_sheet.py --run-dir "$run_dir"
+            fi
+          done
+          git diff --exit-code evals/runs
+
   markdownlint:
     name: Markdown
     runs-on: ubuntu-latest

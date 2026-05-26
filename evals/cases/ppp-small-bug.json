@@ -1,0 +1,102 @@
+{
+  "id": "ppp-small-bug",
+  "skill": "ppp",
+  "description": "PPP should inspect before patching and define direct proof for a small validation bug.",
+  "prompt_path": "examples/tickets/small-bug-fix.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Starts patching immediately without showing that it inspected the relevant validation path.",
+      "Falls back to generic confidence language or broad checks instead of a direct validation proof."
+    ],
+    "good": [
+      "Inspects first, keeps the change tightly scoped, and chooses a direct proof for the whitespace validation behavior.",
+      "Keeps the work reviewable and PR-oriented rather than turning a small bug into a refactor."
+    ],
+    "excellent": [
+      "Anchors the proof to the exact validation behavior and the closest existing test pattern in the repo.",
+      "Shows the smallest safe change, the strongest direct proof, and the expected review handoff with almost no wasted motion."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "inspect-relevant-validation-area",
+      "dimension": "inspection",
+      "points": 2,
+      "description": "Inspects or reviews the relevant validation area before editing.",
+      "any": [
+        "inspect",
+        "review relevant code",
+        "read the relevant code",
+        "validation"
+      ]
+    },
+    {
+      "name": "state-proof-before-patch",
+      "dimension": "proof",
+      "points": 1,
+      "description": "Makes proof visible before patching.",
+      "any": [
+        "proof",
+        "prove"
+      ]
+    },
+    {
+      "name": "tie-proof-to-behaviour",
+      "dimension": "proof",
+      "points": 2,
+      "description": "Proof is tied to the validation behaviour rather than generic checks.",
+      "any": [
+        "whitespace",
+        "validation",
+        "reject",
+        "behaviour"
+      ]
+    },
+    {
+      "name": "prefer-targeted-test",
+      "dimension": "proof",
+      "points": 2,
+      "description": "Prefers a targeted affected-area test.",
+      "any": [
+        "targeted test",
+        "affected validation test",
+        "existing validation pattern"
+      ]
+    },
+    {
+      "name": "small-safe-scope",
+      "dimension": "scope",
+      "points": 1,
+      "description": "Frames the work as a small safe change.",
+      "any": [
+        "smallest safe",
+        "small safe",
+        "focused PR"
+      ]
+    },
+    {
+      "name": "pr-review-handoff",
+      "dimension": "handoff",
+      "points": 2,
+      "description": "Keeps review or PR handoff visible.",
+      "any": [
+        "review",
+        "PR",
+        "handoff"
+      ]
+    },
+    {
+      "name": "no-broad-proof-substitute",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize using broad generic checks as the main proof.",
+      "any": [
+        "full suite only",
+        "run everything first",
+        "lint.*main proof",
+        "typecheck.*main proof"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "shape-large-feature",
+  "skill": "shape",
+  "description": "Shape should refuse to send a broad dashboard request straight to PPP and instead identify a safe first PR.",
+  "prompt_path": "examples/tickets/large-feature-too-big.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Routes the whole dashboard request straight into implementation or stays too vague to define a real first PR.",
+      "Produces generic planning language without a concrete, safe first slice."
+    ],
+    "good": [
+      "Routes the broad work to Ship or a human decision and identifies a concrete first slice with visible proof ideas.",
+      "Keeps the acceptance criteria or equivalent scope boundaries explicit."
+    ],
+    "excellent": [
+      "Chooses the strongest first PR slice for delivery leverage, not just any safe slice.",
+      "Preserves enough shaped detail that the next workflow can execute confidently without reopening broad product discovery."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "not-direct-ppp",
+      "dimension": "routing",
+      "points": 2,
+      "description": "Does not recommend implementing the full dashboard directly with PPP.",
+      "none": [
+        "ready-for-ppp.*analytics dashboard",
+        "implement this directly with /ppp"
+      ]
+    },
+    {
+      "name": "route-to-ship-or-decision",
+      "dimension": "routing",
+      "points": 3,
+      "description": "Routes broad work to Ship or holds for a human decision.",
+      "any": [
+        "ready-for-ship",
+        "needs-human-decision",
+        "/ship"
+      ]
+    },
+    {
+      "name": "specific-acceptance-criteria",
+      "dimension": "scope",
+      "points": 2,
+      "description": "Produces acceptance criteria or equivalent scoped requirements.",
+      "any": [
+        "Acceptance criteria",
+        "AC1"
+      ]
+    },
+    {
+      "name": "proof-ideas-visible",
+      "dimension": "proof",
+      "points": 1,
+      "description": "Keeps proof ideas visible.",
+      "any": [
+        "Proof",
+        "proof"
+      ]
+    },
+    {
+      "name": "small-safe-first-slice",
+      "dimension": "scope",
+      "points": 2,
+      "description": "Identifies a concrete safe first slice.",
+      "any": [
+        "dashboard shell",
+        "read-only table",
+        "feature flag",
+        "proof plan"
+      ]
+    },
+    {
+      "name": "preferred-first-slice-and-route",
+      "dimension": "preferred_choice",
+      "points": 3,
+      "description": "Prefers the best outcome: a concrete first slice plus Ship routing for the broader delivery.",
+      "all": [
+        "ready-for-ship|/ship",
+        "dashboard shell|read-only table|feature flag|proof plan"
+      ]
+    },
+    {
+      "name": "avoids-coding-jump",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize jumping straight from broad ask to implementation.",
+      "any": [
+        "start implementing now",
+        "build the dashboard directly",
+        "go straight to code"
+      ]
+    }
+  ]
+}
