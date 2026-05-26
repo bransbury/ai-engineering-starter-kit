@@ -1,6 +1,6 @@
 ---
 name: ppp
-version: 0.7.0
+version: 0.8.0
 description: "Plan. Patch. Prove. A lightweight interactive workflow for normal engineering tasks: inspect code, clarify only blocking questions, plan the smallest safe complete change, prove it, patch in small loops, review production readiness, and prepare a PR."
 ---
 
@@ -23,17 +23,33 @@ Be concise. Inspect only relevant files, summarise instead of pasting code/logs,
 
 Do not create task artifact files by default. Keep state in the conversation and code changes unless the user explicitly asks for notes.
 
+Default to minimal useful output. Keep reasoning compact, but preserve the context that helps the engineer steer:
+
+- important assumptions
+- material decisions
+- proof/check choices
+- meaningful risks or blockers
+
 ## Interaction rules
 
 This skill is interactive. When a decision or next action is needed, show a short menu.
 
 Rules:
 
+- Default to continuing without pausing when the task is clear, the next step is obvious, and no meaningful decision is required.
 - Put the recommended action as option 1.
 - Keep menus to 3–5 options.
 - Treat `yes`, `y`, `go`, `continue`, `proceed`, `next`, `do it`, `run it`, `1`, and `option 1` as selecting option 1.
 - If the user gives free text, treat it as instructions.
 - Always state the current phase: Inspecting, Clarifying, Planning, Proving, Patching, Reviewing, PR handoff, or Blocked.
+
+Pause only when one of these is true:
+
+- a blocking or high-impact decision is needed
+- scope is unclear or no longer fits one focused PR
+- the next proof step is expensive and not repo-required
+- the second focused fix attempt has failed
+- the user explicitly asks to review before continuing
 
 Menu format:
 
@@ -105,7 +121,7 @@ If too large, offer:
 3. Ask for a fuller spec
 4. Stop here
 
-If the user provides a large spec, summarise the goal briefly, identify the smallest PPP-ready task, ask the user to confirm, and proceed only with that task. For multi-PR or multi-slice work, recommend a feature-slicing workflow.
+If the user provides a large spec, summarise the goal briefly, identify the smallest PPP-ready task, and proceed with it when the slice is obvious and low-risk. Ask for confirmation only when multiple plausible first slices exist or the scoping choice materially affects behaviour, proof, or risk. For multi-PR or multi-slice work, recommend a feature-slicing workflow.
 
 ## 1. Inspect
 
@@ -220,6 +236,12 @@ Define proof before implementation.
 
 Choose exactly one primary proof and up to three supporting checks. The primary proof must directly validate the changed behaviour. Lint/typecheck alone is not sufficient for behavioural changes unless no behavioural proof is practical.
 
+Choose proof by behavioural directness first, then by cost:
+
+1. the proof that most directly exercises the changed behaviour
+2. the cheapest proof among equally direct options
+3. broader supporting checks only when they reduce a real residual risk
+
 Use the lowest-cost proof that gives meaningful confidence:
 
 - Static/local sanity: lint, typecheck, build affected package
@@ -227,6 +249,22 @@ Use the lowest-cost proof that gives meaningful confidence:
 - Focused integration/API/contract test: for cross-module or API behaviour
 - E2E/manual workflow: when a real workflow is needed
 - Full suite/expensive checks: only when repo convention, risk, or user request requires it
+
+Prefer one targeted proof command over broad validation bundles unless broader checks are repo-required or clearly justified by risk.
+
+Never substitute breadth for relevance. A full suite that does not meaningfully exercise the changed behaviour is weaker than one targeted behavioural proof that does.
+
+Prefer proofs that:
+
+- exercise the changed user-visible or contract-visible behaviour directly
+- fail if the intended behaviour regresses
+- isolate the affected area enough to speed iteration
+
+Avoid proof plans that rely mainly on:
+
+- lint/typecheck/build when behaviour changed
+- snapshots or implementation-detail assertions without behavioural checks
+- large undifferentiated test bundles when one targeted test would prove the change more directly
 
 Ask before running expensive integration/E2E/full-suite checks unless the repo explicitly requires them.
 
@@ -270,6 +308,12 @@ If unit tests are not practical or not applicable:
 
 Do not write tests that only assert implementation details rather than behaviour.
 
+Prefer tests that answer:
+
+- what behaviour changed?
+- where would a regression show up?
+- what is the cheapest repeatable proof of that behaviour?
+
 If CI/CD enforces unit coverage, do not recommend a normal PR that is likely to fail coverage. Add tests or flag the blocker first.
 
 ## 5. Patch
@@ -294,6 +338,28 @@ If the work becomes larger, riskier, or different from the plan, stop and re-pla
 
 If validation fails, stop adding code and diagnose.
 
+When the task starts from a failing test or a provided failing command/error, treat that failure as the primary proof target until it is explained or fixed.
+
+For failing-test work, prefer this focused loop:
+
+1. restate the failing behaviour in one sentence;
+2. reproduce the provided failure, or reason directly from the provided command/error if reproduction is unavailable;
+3. classify the failure before editing;
+4. identify the smallest plausible cause from the failing assertion, stack trace, or nearby implementation;
+5. inspect only the code and test most likely to explain that cause;
+6. apply one focused fix or conclude that the test expectation is clearly wrong;
+7. rerun the targeted failing proof before doing any broader checks.
+
+Do not broaden the debugging loop too early. For a failing test, targeted reproduction and explanation are more important than broad repo-wide validation.
+
+When reasoning about a failing test, explicitly say:
+
+- the failing command or proof target
+- what behaviour the test is asserting
+- whether the likely problem is implementation, expectation, setup, dependency, ambiguity, or unknown
+
+If the failure is not yet understood, do not guess across multiple possible causes in one attempt.
+
 Classify the failure before fixing:
 
 - Implementation bug
@@ -317,6 +383,13 @@ For each attempt:
 5. fix one confirmed cause;
 6. rerun the targeted check.
 
+For failing-test tickets specifically:
+
+- do not weaken, skip, or delete the failing test to make progress;
+- do not switch the main proof from the failing behaviour to lint/typecheck/full-suite checks;
+- do not bundle multiple speculative fixes into one attempt;
+- do not treat “all other checks pass” as evidence that the failure is resolved.
+
 After two failed attempts, stop and hand back:
 
 ```md
@@ -331,6 +404,8 @@ Current evidence:
 - key error:
 - likely cause:
 - files touched:
+- proof gap:
+- smallest next resumable task:
 
 Recommended next action:
 Ask a peer/senior engineer to inspect, or debug manually with this evidence.
@@ -379,6 +454,8 @@ If three or more “Should fix” items apply, address them before PR unless the
 - Non-blocking polish
 
 If a blocking item fails, do not finish. Fix it if safe and in scope, rerun proof, and review again. If not safe, report the blocker.
+
+In the final review and PR handoff, prefer a small number of high-signal checks over long check lists. Always make clear which command or test is the primary proof that the change works.
 
 When review fails:
 

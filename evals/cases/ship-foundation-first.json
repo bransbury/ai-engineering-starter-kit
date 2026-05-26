@@ -1,0 +1,113 @@
+{
+  "id": "ship-foundation-first",
+  "skill": "ship",
+  "description": "Ship should detect foundation-first work, avoid unsafe parallelism on moving contracts, and reason about review burden.",
+  "prompt_path": "evals/prompts/ship-foundation-first.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Treats low file overlap as enough reason to parallelize immediately even when contracts or validation bases are still moving.",
+      "Mentions waves without a real foundation-first sequencing logic."
+    ],
+    "good": [
+      "Detects the foundation task, stabilizes it first, and then plans safe follow-on work in later waves.",
+      "Explicitly reasons about review burden and unstable shared contracts."
+    ],
+    "excellent": [
+      "Produces the kind of two-wave delivery plan a strong engineering lead would actually want to run: stabilize the base first, then parallelize only what is safe and reviewable.",
+      "Balances dependency risk, review burden, and execution speed rather than optimizing for one in isolation."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "route-visible",
+      "dimension": "routing",
+      "points": 1,
+      "description": "Makes the route visible.",
+      "any": [
+        "route"
+      ]
+    },
+    {
+      "name": "confidence-visible",
+      "dimension": "routing",
+      "points": 1,
+      "description": "Makes confidence visible.",
+      "any": [
+        "confidence"
+      ]
+    },
+    {
+      "name": "foundation-detected",
+      "dimension": "dependency_planning",
+      "points": 2,
+      "description": "Identifies a foundation step around contracts, schema, or validation.",
+      "any": [
+        "foundation",
+        "schema",
+        "validation base",
+        "shared contract"
+      ]
+    },
+    {
+      "name": "wave-one-visible",
+      "dimension": "wave_planning",
+      "points": 1,
+      "description": "Makes wave 1 visible.",
+      "all": [
+        "wave 1"
+      ]
+    },
+    {
+      "name": "wave-two-visible",
+      "dimension": "wave_planning",
+      "points": 1,
+      "description": "Makes wave 2 visible.",
+      "all": [
+        "wave 2"
+      ]
+    },
+    {
+      "name": "sequence-over-unsafe-parallelism",
+      "dimension": "risk_routing",
+      "points": 2,
+      "description": "Shows sequencing or avoids unsafe parallelism while contracts are unstable.",
+      "any": [
+        "do not parallelize",
+        "unstable",
+        "sequence"
+      ]
+    },
+    {
+      "name": "review-burden-explicit",
+      "dimension": "reviewability",
+      "points": 2,
+      "description": "Reasons explicitly about review burden.",
+      "any": [
+        "review burden",
+        "reviewable",
+        "merge order"
+      ]
+    },
+    {
+      "name": "preferred-foundation-then-follow-on-waves",
+      "dimension": "preferred_choice",
+      "points": 3,
+      "description": "Prefers the best two-wave plan: wave 1 stabilizes contract/schema/validation, wave 2 handles follow-on UI/API/docs/tests.",
+      "all": [
+        "(?s)wave 1.*(contract|schema|validation)",
+        "(?s)wave 2.*(ui|results table|csv|docs|tests|export)"
+      ]
+    },
+    {
+      "name": "no-everything-parallel",
+      "dimension": "risk_routing",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize claiming everything can run in parallel immediately.",
+      "any": [
+        "all tasks can run in parallel immediately",
+        "everything is independent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "id": "ppp-failing-test",
+  "skill": "ppp",
+  "description": "PPP should preserve the failing test, attempt focused fixes, and stop cleanly if proof still fails.",
+  "prompt_path": "examples/tickets/failing-test.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Treats the failure like a generic fix task and jumps to speculative edits without classifying the failure first.",
+      "Weakens, sidesteps, or de-emphasizes the failing proof target instead of preserving it."
+    ],
+    "good": [
+      "Keeps the failing test or failing command as the primary proof target and works one focused cause at a time.",
+      "Stops cleanly when the bounded debugging loop is exhausted and leaves a useful blocker handoff."
+    ],
+    "excellent": [
+      "Classifies the likely failure mode before editing, chooses one focused hypothesis per attempt, and keeps the debugging loop extremely tight.",
+      "If it stops, it leaves the proof gap, the exact attempted path, and the smallest resumable next task so a human does not need to rediscover context."
+    ]
+  },
+  "criteria": [
+    {
+      "name": "keep-failure-as-primary-proof",
+      "dimension": "proof",
+      "points": 2,
+      "description": "Keeps the provided failure as the main proof target.",
+      "any": [
+        "failing command",
+        "provided failure",
+        "primary proof",
+        "proof target"
+      ]
+    },
+    {
+      "name": "classify-failure",
+      "dimension": "diagnosis",
+      "points": 2,
+      "description": "Classifies the failure before editing.",
+      "any": [
+        "classify",
+        "implementation bug",
+        "test expectation",
+        "environment",
+        "unknown"
+      ]
+    },
+    {
+      "name": "one-cause-per-attempt",
+      "dimension": "debug_loop",
+      "points": 2,
+      "description": "Describes one focused cause/fix per attempt.",
+      "any": [
+        "one confirmed cause",
+        "one focused fix",
+        "focused fix"
+      ]
+    },
+    {
+      "name": "bounded-attempts",
+      "dimension": "debug_loop",
+      "points": 2,
+      "description": "Keeps the loop bounded to two focused attempts.",
+      "any": [
+        "two focused fix attempts",
+        "at most two focused fixes",
+        "maximum automatic fix attempts: 2"
+      ]
+    },
+    {
+      "name": "blocked-handoff-proof-gap",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Blocked handoff includes a proof gap.",
+      "any": [
+        "proof gap"
+      ]
+    },
+    {
+      "name": "blocked-handoff-resumable-next-step",
+      "dimension": "blocker_handoff",
+      "points": 2,
+      "description": "Blocked handoff includes the smallest resumable next task.",
+      "any": [
+        "smallest next resumable task",
+        "resumable"
+      ]
+    },
+    {
+      "name": "preferred-debugging-handoff-structure",
+      "dimension": "preferred_choice",
+      "points": 2,
+      "description": "Prefers the strongest blocked handoff: what was tried, proof gap, and smallest next resumable task.",
+      "all": [
+        "What I tried|tried",
+        "proof gap",
+        "smallest next resumable task"
+      ]
+    },
+    {
+      "name": "no-test-weakening",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize weakening, skipping, or deleting the failing test.",
+      "any": [
+        "weaken the test",
+        "remove the assertion",
+        "skip the test",
+        "delete the test"
+      ]
+    },
+    {
+      "name": "no-broad-proof-switch",
+      "dimension": "execution_discipline",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize switching the main proof to broad generic checks.",
+      "any": [
+        "full suite.*main proof",
+        "lint.*main proof",
+        "typecheck.*main proof",
+        "all other checks pass"
+      ]
+    }
+  ]
+}

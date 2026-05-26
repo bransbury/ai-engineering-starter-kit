@@ -1,0 +1,97 @@
+{
+  "id": "ship-review-burden",
+  "skill": "ship",
+  "description": "Ship should factor review burden into routing even when file overlap alone might look manageable.",
+  "prompt_path": "evals/prompts/ship-review-burden.md",
+  "reasoning_quality_notes": {
+    "weak": [
+      "Optimizes only for implementation independence and ignores that reviewers would need to reconstruct one shared behavior across multiple PRs.",
+      "Assumes parallelism is good whenever file overlap is low."
+    ],
+    "good": [
+      "Makes review burden explicit and prefers a smaller wave or sequenced route when shared user-visible behavior would be awkward to review in parallel.",
+      "Connects routing decisions to reviewer cognition, not just execution mechanics."
+    ],
+    "excellent": [
+      "Recognizes the hidden coupling in shared user-visible behavior and chooses the most reviewable delivery route, even if that means less concurrency.",
+      "Shows mature orchestration judgement: not just 'can these tasks run in parallel?' but 'should they ship that way?'"
+    ]
+  },
+  "criteria": [
+    {
+      "name": "route-visible",
+      "dimension": "routing",
+      "points": 1,
+      "description": "Makes the route visible.",
+      "all": [
+        "Route"
+      ]
+    },
+    {
+      "name": "confidence-visible",
+      "dimension": "routing",
+      "points": 1,
+      "description": "Makes confidence visible.",
+      "all": [
+        "Confidence"
+      ]
+    },
+    {
+      "name": "mentions-review-burden",
+      "dimension": "reviewability",
+      "points": 3,
+      "description": "Explicitly reasons about review burden.",
+      "any": [
+        "review burden",
+        "reviewable",
+        "same user-visible behaviour",
+        "merge order"
+      ]
+    },
+    {
+      "name": "recognizes-shared-behaviour",
+      "dimension": "reviewability",
+      "points": 2,
+      "description": "Recognizes the same user-visible behaviour spans the work.",
+      "any": [
+        "same user-visible behaviour",
+        "shared contract",
+        "reviewers",
+        "mapping"
+      ]
+    },
+    {
+      "name": "avoid-fragmented-parallelism",
+      "dimension": "wave_planning",
+      "points": 2,
+      "description": "Avoids over-fragmenting the work into many PRs.",
+      "any": [
+        "sequence",
+        "single PR",
+        "smaller wave",
+        "reduce the parallel wave"
+      ]
+    },
+    {
+      "name": "preferred-review-burden-route",
+      "dimension": "preferred_choice",
+      "points": 3,
+      "description": "Prefers the best route: explicitly connect shared user-visible behaviour to a smaller wave or sequenced plan.",
+      "all": [
+        "same user-visible behaviour|mapping",
+        "single PR|smaller wave|reduce the parallel wave|sequence"
+      ]
+    },
+    {
+      "name": "no-everything-parallel",
+      "dimension": "risk_routing",
+      "points": 2,
+      "kind": "penalty",
+      "description": "Penalize claiming everything can run in parallel immediately.",
+      "any": [
+        "all tasks can run in parallel immediately",
+        "everything is independent"
+      ]
+    }
+  ]
+}

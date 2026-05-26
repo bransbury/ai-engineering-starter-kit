@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.8.0
+
+- Reduced unnecessary PPP pauses by letting clear single-task work auto-advance until a real decision, expensive proof step, or blocker appears.
+- Tightened Shape so it still confirms one decision at a time, but only for material trade-offs instead of low-risk defaults and obvious routing.
+- Simplified Ship's visible output so it always reports route and confidence, but only shows the full routing scorecard when it helps the user steer.
+- Upgraded Ship's execution-wave planning to detect foundation-first work more aggressively, block unsafe parallelism around unstable shared contracts, prefer two-wave foundation-then-parallel plans, and reason explicitly about review burden.
+- Strengthened PPP and PPP Cloud proof heuristics to choose behaviour-direct proof first, reject broad but weak validation bundles, and make the primary proof more visible in review and PR handoff.
+- Improved PPP and PPP Cloud blocker handoffs with explicit proof gaps and smallest next resumable tasks after failed validation attempts.
+- Improved Shape stop and handoff quality so blocked shaping reports what is already safe, what remains intentionally unshaped, and the smallest next shaped task after the missing decision.
+- Added a stronger minimal-output bias across the core skills while preserving important assumptions, proof choices, risks, blockers, and routing rationale.
+- Added a skill eval harness with repo-local prompts, granular weighted criteria, penalties, dimension-level scoring, run scaffolding, result fingerprints, baseline comparison, a cross-model scoreboard, adversarial cases, and CI validation of both the eval definitions and the workflow itself.
+- Added generated `manual-review.md` companion sheets for eval runs so human reviewers can capture best-route, best-proof, blocker-quality, verbosity, and rubric-calibration judgments alongside machine scores.
+- Added structured `reasoning_quality_notes` to every eval case so human reviewers can calibrate responses against explicit weak, good, and excellent answer patterns.
+
 ## 0.7.0
 
 - Added `shape` and `ship` as first-class shipped skills in the installers and uninstallers.
