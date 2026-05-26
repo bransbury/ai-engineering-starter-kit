@@ -5,6 +5,7 @@ This table compares scored eval runs across models and agents. Use runs from the
 | Run ID | Provider | Model | Agent | Cases | Overall | Shape | Ship | PPP | PPP Cloud |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-26-gpt-5-4 | openai | gpt-5-4 | vscode | 10/10 | 95.7% | 90.9% | 100.0% | 94.3% | 100.0% |
+| 2026-05-26-opus-4-6 | anthropic | opus-4-6 | vscode | 10/10 | 67.0% | 72.7% | 100.0% | 31.4% | 77.3% |
 | 2026-05-26-sonnet-4-6 | anthropic | sonnet-4-6 | vscode | 10/10 | 69.6% | 36.4% | 100.0% | 60.0% | 100.0% |
 
 ## Dimension Matrix
@@ -12,9 +13,35 @@ This table compares scored eval runs across models and agents. Use runs from the
 | Run ID | Model | Agent | Risk Routing | Blocker Handoff | Preferred Choice | Execution Discipline | Scope | Pattern Reuse | Proof | Handoff | Diagnosis | Debug Loop | Inspection | Routing | Interaction | Dependency Planning | Wave Planning | Reviewability |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-26-gpt-5-4 | gpt-5-4 | vscode | 100.0% | 100.0% | 100.0% | 0.0% | 75.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% | 100.0% | 100.0% | 100.0% |
+| 2026-05-26-opus-4-6 | opus-4-6 | vscode | 100.0% | 66.7% | 61.1% | 0.0% | 33.3% | 100.0% | 78.9% | 0.0% | 0.0% | 0.0% | 66.7% | 83.3% | 0.0% | 100.0% | 100.0% | 100.0% |
 | 2026-05-26-sonnet-4-6 | sonnet-4-6 | vscode | 75.0% | 44.4% | 61.1% | 0.0% | 50.0% | 100.0% | 94.7% | 50.0% | 100.0% | 0.0% | 100.0% | 75.0% | 0.0% | 100.0% | 100.0% | 100.0% |
 
 ## Pairwise Comparison
+
+### 2026-05-26-gpt-5-4 vs 2026-05-26-opus-4-6
+
+- `2026-05-26-gpt-5-4`: gpt-5-4 (vscode)
+- `2026-05-26-opus-4-6`: opus-4-6 (vscode)
+- Fingerprint match: no. Treat this as a directional comparison only.
+- Overall winner: `2026-05-26-gpt-5-4` by +28.7 pts.
+
+#### Skill Edges
+
+- `2026-05-26-gpt-5-4` leads on: `PPP` (+62.9 pts), `PPP Cloud` (+22.7 pts), `Shape` (+18.2 pts).
+- `2026-05-26-opus-4-6` leads on: none.
+- Tied skills: `Ship`.
+
+#### Dimension Edges
+
+- `2026-05-26-gpt-5-4` leads on: `Debug Loop` (+100.0 pts), `Diagnosis` (+100.0 pts), `Handoff` (+100.0 pts), `Scope` (+41.7 pts), `Preferred Choice` (+38.9 pts), `Blocker Handoff` (+33.3 pts), `Inspection` (+33.3 pts), `Proof` (+21.1 pts), `Routing` (+16.7 pts).
+- `2026-05-26-opus-4-6` leads on: none.
+- Tied dimensions: `Dependency Planning`, `Execution Discipline`, `Interaction`, `Pattern Reuse`, `Reviewability`, `Risk Routing`, `Wave Planning`.
+
+#### Top Separating Cases
+
+- `2026-05-26-gpt-5-4` strongest cases: `ppp-failing-test` (+85.7 pts), `ppp-proof-trap` (+54.5 pts), `ppp-cloud-ui-empty-state` (+50.0 pts), `ppp-small-bug` (+40.0 pts), `shape-public-api-ambiguity` (+33.3 pts).
+- `2026-05-26-opus-4-6` strongest cases: none.
+- Tied cases: 4 of 10.
 
 ### 2026-05-26-gpt-5-4 vs 2026-05-26-sonnet-4-6
 
@@ -41,9 +68,38 @@ This table compares scored eval runs across models and agents. Use runs from the
 - `2026-05-26-sonnet-4-6` strongest cases: `ppp-proof-trap` (+18.2 pts).
 - Tied cases: 5 of 10.
 
+### 2026-05-26-opus-4-6 vs 2026-05-26-sonnet-4-6
+
+- `2026-05-26-opus-4-6`: opus-4-6 (vscode)
+- `2026-05-26-sonnet-4-6`: sonnet-4-6 (vscode)
+- Fingerprint match: no. Treat this as a directional comparison only.
+- Overall winner: `2026-05-26-sonnet-4-6` by +2.6 pts.
+
+#### Skill Edges
+
+- `2026-05-26-opus-4-6` leads on: `Shape` (+36.3 pts).
+- `2026-05-26-sonnet-4-6` leads on: `PPP` (+28.6 pts), `PPP Cloud` (+22.7 pts).
+- Tied skills: `Ship`.
+
+#### Dimension Edges
+
+- `2026-05-26-opus-4-6` leads on: `Risk Routing` (+25.0 pts), `Blocker Handoff` (+22.3 pts), `Routing` (+8.3 pts).
+- `2026-05-26-sonnet-4-6` leads on: `Diagnosis` (+100.0 pts), `Handoff` (+50.0 pts), `Inspection` (+33.3 pts), `Scope` (+16.7 pts), `Proof` (+15.8 pts).
+- Tied dimensions: `Debug Loop`, `Dependency Planning`, `Execution Discipline`, `Interaction`, `Pattern Reuse`, `Preferred Choice`, `Reviewability`, `Wave Planning`.
+
+#### Top Separating Cases
+
+- `2026-05-26-opus-4-6` strongest cases: `shape-large-feature` (+61.5 pts), `shape-public-api-ambiguity` (+50.0 pts).
+- `2026-05-26-sonnet-4-6` strongest cases: `ppp-proof-trap` (+72.7 pts), `ppp-cloud-ui-empty-state` (+50.0 pts), `shape-clear-small-bug` (+25.0 pts), `ppp-failing-test` (+14.3 pts).
+- Tied cases: 4 of 10.
+
 ## Saturation Analysis
 
 This section analyzes only comparable run cohorts that share the same fingerprint. A metric is `high-signal` when it clearly separates runs, `medium-signal` when it shows some spread, and `saturated` when it no longer provides meaningful separation.
+
+### Fingerprint Cohort `c9529c146440` (1 runs)
+
+Need at least two runs in the same fingerprint cohort.
 
 ### Fingerprint Cohort `db94cc75d3ed` (2 runs)
 
@@ -138,6 +194,7 @@ This section analyzes only comparable run cohorts that share the same fingerprin
 | Run ID | Model | Agent | ppp-cloud-auth-unclear | ppp-cloud-ui-empty-state | ppp-failing-test | ppp-proof-trap | ppp-small-bug | shape-clear-small-bug | shape-large-feature | shape-public-api-ambiguity | ship-foundation-first | ship-review-burden |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-26-gpt-5-4 | gpt-5-4 | vscode | 12.0/12.0 | 10.0/10.0 | 14.0/14.0 | 9.0/11.0 | 10.0/10.0 | 5.0/8.0 | 13.0/13.0 | 12.0/12.0 | 13.0/13.0 | 12.0/12.0 |
+| 2026-05-26-opus-4-6 | opus-4-6 | vscode | 12.0/12.0 | 5.0/10.0 | 2.0/14.0 | 3.0/11.0 | 6.0/10.0 | 3.0/8.0 | 13.0/13.0 | 8.0/12.0 | 13.0/13.0 | 12.0/12.0 |
 | 2026-05-26-sonnet-4-6 | sonnet-4-6 | vscode | 12.0/12.0 | 10.0/10.0 | 4.0/14.0 | 11.0/11.0 | 6.0/10.0 | 5.0/8.0 | 5.0/13.0 | 2.0/12.0 | 13.0/13.0 | 12.0/12.0 |
 
 ## Notes

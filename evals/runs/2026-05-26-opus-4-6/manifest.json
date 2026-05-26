@@ -1,0 +1,26 @@
+{
+  "run_id": "2026-05-26-opus-4-6",
+  "created_at": "2026-05-26T14:56:35.919458+00:00",
+  "repo_commit": "eaa9f4c25df53cf83807c91e9903af80f59f59f4",
+  "cases_dir": "evals/cases",
+  "model": {
+    "provider": "anthropic",
+    "name": "opus-4-6",
+    "version": "opus-4-6",
+    "temperature": "",
+    "top_p": "",
+    "reasoning_effort": "high"
+  },
+  "agent": {
+    "name": "vscode"
+  },
+  "notes": "",
+  "reproducibility": {
+    "instructions": [
+      "Use a fresh session/thread per case.",
+      "Keep the same model, provider, tool environment, and exposed sampling settings for the whole run.",
+      "Do not mix responses from different commits or different skill versions in one run.",
+      "Exact output identity is not guaranteed by most LLM providers; compare scores and drift, not just byte-for-byte text."
+    ]
+  }
+}
